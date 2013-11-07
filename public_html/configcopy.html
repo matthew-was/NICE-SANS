@@ -1,0 +1,132 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Configuration Panel</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src=tableProperties.js></script>
+        <script>
+            $(function() {
+                configurations = [];
+                
+                window.onload = function() {
+                    configurations = [];
+                    var config = {
+                        name: "1m5",
+                        wavelength:5,
+                        wavelengthSpread:0.132,
+                        attenuator:0,
+                        guides:0,
+                        guideAperture:14.3,
+                        beamStop:1,
+                        beamStopX:0,
+                        beamStopY:0,
+                        beamCenterX:64,
+                        beamCenterY:64,
+                        detectorPosition:110,
+                        detectorOffset:0
+                    };
+                    configurations.push(config);
+                    addrow(configurations);
+                };
+                
+                addrow = function(configuration) {
+                    table = document.getElementById('config_table');
+                    var rowNum = table.rows.length;
+                    if (rowNum !== 0){
+                        for( var i = 0; i<rowNum; i++) {
+                            console.log(i); 
+                            table.deleteRow();
+                        }
+                    }
+                    var head = "<tr><td>Name</td><td>Wavelength</td><td>Wavelength Spread</td><td>Attenuator</td><td>Guides</td><td>Guide Aperture</td><td>Beam Stop</td><td>Beam Stop X Position</td><td>Beam Stop Y Position</td><td>Beam Center X Position</td><td>Beam Center Y Position</td><td>Detector Distance</td><td>Detector Offset</td><td></td></tr>";
+                    table.insertRow(0).innerHTML = head;
+                    for (var j=0; j<configuration.length; j++) {
+                        var row = "<tr><td><input type='text' id='name' value="+configuration[j].name+" /></td><td><input type='text'value=" + configuration[j].wavelength + " /></td><td><input type='text' value=" + configuration[j].wavelengthSpread + " /></td><td><input type='text' value=" + configuration[j].attenuator + " /></td><td><input type='text' value=" + configuration[j].guides + " /></td><td><input type='text' value=" + configuration[j].guideAperture + " /></td><td><input type='text' value=" + configuration[j].beamStop + " /></td><td><input type='text' value=" + configuration[j].beamStopX + " /></td><td><input type='text' value=" + configuration[j].beamStopY + " /></td><td><input type='text' value=" + configuration[j].beamCenterX + " /></td><td><input type='text' value=" + configuration[j].beamCenterY + " /></td><td><input type='text' value=" + configuration[j].detectorPosition + " /></td><td><input type='text' value=" + configuration[j].detectorOffset + " /></td></tr>";
+                        table.insertRow(j+1).innerHTML = setTable(configuration[j]);
+                    }
+                };
+                
+                
+                $( "#addButton" ).click(function() {
+                    console.log("add");
+                    var config = {
+                        name: "1m5",
+                        wavelength:5,
+                        wavelengthSpread:0.132,
+                        attenuator:0,
+                        guides:0,
+                        guideAperture:14.3,
+                        beamStop:1,
+                        beamStopX:0,
+                        beamStopY:0,
+                        beamCenterX:64,
+                        beamCenterY:64,
+                        detectorPosition:110,
+                        detectorOffset:0
+                    };
+                    configurations.push(config);
+                    addrow(configurations);
+                });
+                
+                $( "#setButton" ).click(function() {
+                    console.log("set");
+                    var table = document.getElementById('config_table');
+                    var rowNum = table.rows.length;
+                    for (i=1; i<rowNum; i++) {
+                        colNum = table.rows[i].cells.length;
+                        for (j=0; j<colNum; j++) {
+                            console.log(table.rows[i].cells[j].firstChild.value)
+                        }
+                    }
+                    if (rowNum === configurations.length+1) {
+                        console.log("even");
+                    }
+                });
+                
+                $( "#alignButton" ).click(function() {
+                    console.log("align");
+                });
+
+            });
+        </script>
+        <style>
+            #content {position: relative; height:500px; width: 500px;background-color: lightgray; overflow:auto}
+            #configs {position: relative;}
+            #buttons {position:absolute; bottom: 0px; height:50px; width:500px; }
+            
+            #config_table {table-layout:fixed; width: 200px}
+            #configs tr, #configs td {text-align: center; width: 90px; border: 1px solid black}
+            
+            #buttonsplace {position: fixed; top: 460px; left: 325px;}
+            .controlbutton {width:50px; height:20px}
+            
+            #wavelength1 {width:80px;}
+            input {width:80px}
+            #test {border: 1px solid black}
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <div id="configs">
+                <table id="config_table">
+                </table>
+            </div>
+            <div id="buttons">
+                <div id="buttonsplace">
+                    <input type="button" class="controlbutton" value="+" id="addButton"/>
+                    <input type="button" class="controlbutton" value="Set" id="setButton"/>
+                    <input type="button" class="controlbutton" value="Align" id="alignButton"/>
+                </div>
+            </div>
+        </div>
+        <div id="test">
+        </div>
+    </body>
+</html>
