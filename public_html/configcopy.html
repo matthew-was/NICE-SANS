@@ -24,6 +24,7 @@ and open the template in the editor.
                         attenuator:0,
                         guides:0,
                         guideAperture:14.3,
+                        sampleAperture: 12.7,
                         beamStop:1,
                         beamStopX:0,
                         beamStopY:0,
@@ -45,10 +46,9 @@ and open the template in the editor.
                             table.deleteRow();
                         }
                     }
-                    var head = "<tr><td>Name</td><td>Wavelength</td><td>Wavelength Spread</td><td>Attenuator</td><td>Guides</td><td>Guide Aperture</td><td>Beam Stop</td><td>Beam Stop X Position</td><td>Beam Stop Y Position</td><td>Beam Center X Position</td><td>Beam Center Y Position</td><td>Detector Distance</td><td>Detector Offset</td><td></td></tr>";
+                    var head = "<tr><td>Name</td><td>Wavelength</td><td>Wavelength Spread</td><td>Attenuator</td><td>Guides</td><td>Guide Aperture</td><td>Sample Aperture</td><td>Beam Stop</td><td>Beam Stop X Position</td><td>Beam Stop Y Position</td><td>Beam Center X Position</td><td>Beam Center Y Position</td><td>Detector Distance</td><td>Detector Offset</td></tr>";
                     table.insertRow(0).innerHTML = head;
                     for (var j=0; j<configuration.length; j++) {
-                        var row = "<tr><td><input type='text' id='name' value="+configuration[j].name+" /></td><td><input type='text'value=" + configuration[j].wavelength + " /></td><td><input type='text' value=" + configuration[j].wavelengthSpread + " /></td><td><input type='text' value=" + configuration[j].attenuator + " /></td><td><input type='text' value=" + configuration[j].guides + " /></td><td><input type='text' value=" + configuration[j].guideAperture + " /></td><td><input type='text' value=" + configuration[j].beamStop + " /></td><td><input type='text' value=" + configuration[j].beamStopX + " /></td><td><input type='text' value=" + configuration[j].beamStopY + " /></td><td><input type='text' value=" + configuration[j].beamCenterX + " /></td><td><input type='text' value=" + configuration[j].beamCenterY + " /></td><td><input type='text' value=" + configuration[j].detectorPosition + " /></td><td><input type='text' value=" + configuration[j].detectorOffset + " /></td></tr>";
                         table.insertRow(j+1).innerHTML = setTable(configuration[j]);
                     }
                 };
@@ -63,6 +63,7 @@ and open the template in the editor.
                         attenuator:0,
                         guides:0,
                         guideAperture:14.3,
+                        sampleAperture: 12.7,
                         beamStop:1,
                         beamStopX:0,
                         beamStopY:0,
@@ -99,17 +100,16 @@ and open the template in the editor.
         <style>
             #content {position: relative; height:500px; width: 500px;background-color: lightgray; overflow:auto}
             #configs {position: relative;}
-            #buttons {position:absolute; bottom: 0px; height:50px; width:500px; }
             
             #config_table {table-layout:fixed; width: 200px}
             #configs tr, #configs td {text-align: center; width: 90px; border: 1px solid black}
             
-            #buttonsplace {position: fixed; top: 460px; left: 325px;}
+            #buttonsplace {position: relative; top: 400px; left: 325px;}
             .controlbutton {width:50px; height:20px}
+            .input {text-align: center}
             
             #wavelength1 {width:80px;}
             input {width:80px}
-            #test {border: 1px solid black}
         </style>
     </head>
     <body>
@@ -125,8 +125,6 @@ and open the template in the editor.
                     <input type="button" class="controlbutton" value="Align" id="alignButton"/>
                 </div>
             </div>
-        </div>
-        <div id="test">
         </div>
     </body>
 </html>
