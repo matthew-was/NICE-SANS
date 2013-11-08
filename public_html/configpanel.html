@@ -10,17 +10,93 @@ and open the template in the editor.
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src=tableProperties.js></script>
         <script>
             $(function() {
+                configurations = [];
+                
+                window.onload = function() {
+                    configurations = [];
+                    var config = {
+                        name: "1m5",
+                        wavelength:5,
+                        wavelengthSpread:0.132,
+                        attenuator:0,
+                        guides:0,
+                        guideAperture:14.3,
+                        beamStop:1,
+                        beamStopX:0,
+                        beamStopY:0,
+                        beamCenterX:64,
+                        beamCenterY:64,
+                        detectorPosition:110,
+                        detectorOffset:0
+                    };
+                    configurations.push(config);
+                    drawTable(configurations);
+                };
+               
+                $( "#addButton" ).click(function() {
+                    configurations = makeObject();
+                    var config = {
+                        name: "1m5",
+                        wavelength:5,
+                        wavelengthSpread:0.132,
+                        attenuator:0,
+                        guides:0,
+                        guideAperture:14.3,
+                        beamStop:1,
+                        beamStopX:0,
+                        beamStopY:0,
+                        beamCenterX:64,
+                        beamCenterY:64,
+                        detectorPosition:110,
+                        detectorOffset:0
+                    };
+                    configurations.push(config);
+                    drawTable(configurations);
+                });
+                
+                $( "#setButton" ).click(function() {
+                    var configuration = makeObject();
+                    console.log(configuration);
+                });
+                
+                $( "#alignButton" ).click(function() {
+                    console.log("align");
+                });
                 
             });
         </script>
         <style>
-            #content {background-color: lightgrey; height: 200px; width:200px; overflow: auto;}
+            #content {position: relative; height:500px; width: 500px;background-color: lightgray; overflow:auto}
+            #configs {position: relative; margin-top: 30px;}
+            
+            #config_table {table-layout:fixed; width: 200px;  border-collapse: separate; border-spacing: 1px 10px;}
+            #configs td {text-align: center; width: 90px; border:1px solid black;}
+            
+            #buttonsplace {position: relative}
+            .controlbutton {width:50px; height:20px}
+            .input {text-align: center}
+            
+            #wavelength1 {width:80px;}
+            input {width:80px}
+            select {width: 80px;}
         </style>
     </head>
     <body>
         <div id="content">
+            <div id="configs">
+                <table id="config_table">
+                </table>
+            </div>
+            <div id="buttons">
+                <div id="buttonsplace">
+                    <input type="button" class="controlbutton" value="+" id="addButton"/>
+                    <input type="button" class="controlbutton" value="Set" id="setButton"/>
+                    <input type="button" class="controlbutton" value="Align" id="alignButton"/>
+                </div>
+            </div>
         </div>
     </body>
 </html>

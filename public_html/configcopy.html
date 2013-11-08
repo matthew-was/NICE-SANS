@@ -24,7 +24,6 @@ and open the template in the editor.
                         attenuator:0,
                         guides:0,
                         guideAperture:14.3,
-                        sampleAperture: 12.7,
                         beamStop:1,
                         beamStopX:0,
                         beamStopY:0,
@@ -34,28 +33,11 @@ and open the template in the editor.
                         detectorOffset:0
                     };
                     configurations.push(config);
-                    addrow(configurations);
+                    drawTable(configurations);
                 };
-                
-                addrow = function(configuration) {
-                    table = document.getElementById('config_table');
-                    var rowNum = table.rows.length;
-                    if (rowNum !== 0){
-                        for( var i = 0; i<rowNum; i++) {
-                            console.log(i); 
-                            table.deleteRow();
-                        }
-                    }
-                    var head = "<tr><td>Name</td><td>Wavelength</td><td>Wavelength Spread</td><td>Attenuator</td><td>Guides</td><td>Guide Aperture</td><td>Sample Aperture</td><td>Beam Stop</td><td>Beam Stop X Position</td><td>Beam Stop Y Position</td><td>Beam Center X Position</td><td>Beam Center Y Position</td><td>Detector Distance</td><td>Detector Offset</td></tr>";
-                    table.insertRow(0).innerHTML = head;
-                    for (var j=0; j<configuration.length; j++) {
-                        table.insertRow(j+1).innerHTML = setTable(configuration[j]);
-                    }
-                };
-                
-                
+               
                 $( "#addButton" ).click(function() {
-                    console.log("add");
+                    configurations = makeObject();
                     var config = {
                         name: "1m5",
                         wavelength:5,
@@ -63,7 +45,6 @@ and open the template in the editor.
                         attenuator:0,
                         guides:0,
                         guideAperture:14.3,
-                        sampleAperture: 12.7,
                         beamStop:1,
                         beamStopX:0,
                         beamStopY:0,
@@ -73,43 +54,34 @@ and open the template in the editor.
                         detectorOffset:0
                     };
                     configurations.push(config);
-                    addrow(configurations);
+                    drawTable(configurations);
                 });
                 
                 $( "#setButton" ).click(function() {
-                    console.log("set");
-                    var table = document.getElementById('config_table');
-                    var rowNum = table.rows.length;
-                    for (i=1; i<rowNum; i++) {
-                        colNum = table.rows[i].cells.length;
-                        for (j=0; j<colNum; j++) {
-                            console.log(table.rows[i].cells[j].firstChild.value)
-                        }
-                    }
-                    if (rowNum === configurations.length+1) {
-                        console.log("even");
-                    }
+                    var configuration = makeObject();
+                    console.log(configuration);
                 });
                 
                 $( "#alignButton" ).click(function() {
                     console.log("align");
                 });
-
+                
             });
         </script>
         <style>
             #content {position: relative; height:500px; width: 500px;background-color: lightgray; overflow:auto}
-            #configs {position: relative;}
+            #configs {position: relative; margin-top: 30px;}
             
-            #config_table {table-layout:fixed; width: 200px}
-            #configs tr, #configs td {text-align: center; width: 90px; border: 1px solid black}
+            #config_table {table-layout:fixed; width: 200px;  border-collapse: separate; border-spacing: 1px 10px;}
+            #configs td {text-align: center; width: 90px; border:1px solid black;}
             
-            #buttonsplace {position: relative; top: 400px; left: 325px;}
+            #buttonsplace {position: relative}
             .controlbutton {width:50px; height:20px}
             .input {text-align: center}
             
             #wavelength1 {width:80px;}
             input {width:80px}
+            select {width: 80px;}
         </style>
     </head>
     <body>
