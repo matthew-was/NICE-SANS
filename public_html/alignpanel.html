@@ -1,0 +1,57 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Align Panel</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src=tableProperties.js></script>
+        <script>
+            $(function() {
+                configurations = [];
+                
+                $('#Done').click( function() {
+                    getAlign();
+                    close();
+                });
+                
+                $('#scatRun').click( function() {
+                    console.log("Run a scattering run for 10s");
+                });
+                
+                $('#transRun').click( function() {
+                    console.log("Run a transmission run for 180s");
+                });
+                
+                window.onload = function() {
+                    var n = localStorage.numb;
+                    configurations = JSON.parse(localStorage.configurations);
+                    alignTable(configurations[n-1]);
+                    if (configurations[n-1].beamStopX < -10) {
+                        document.getElementById('scatRun').disabled=true;
+                    } else {
+                        document.getElementById('transRun').disabled=true;                        
+                    }
+                };
+            });
+        </script>
+        <style>
+            #content {position: relative; height:500px; width: 500px;background-color: lightgray; overflow:auto}
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <table id="alignTable"></table>
+            <div id="buttons">
+                <input type="button" id="Done" value="Done"/>
+                <input type="button" id="scatRun" value="Scattering Run"/>
+                <input type="button" id="transRun" value="Transmission Run"/>
+            </div>
+        </div>
+    </body>
+</html>

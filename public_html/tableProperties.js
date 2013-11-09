@@ -143,6 +143,8 @@ $(function() {
         }        
         var detOff = "<td><input type='text' class='input' onchange=makeObject() value=" + object.detectorOffset + " /></td></tr>";
         
+        var align = "<input type='button' id='alignbtn' onclick=alignRow("+rnum+") value='Align' />";
+        
         var rowNum = configurations.length;
         if (rowNum < 2) {
             var del = "";
@@ -150,7 +152,7 @@ $(function() {
             var del = "<input type='button' id='delbtn' onclick=deleteRow("+rnum+") value='Delete'/>";
         }
         
-        return start+name+wl+wlS+att+guide+guideAp+bStop+bStopX+bStopY+bCentX+bCentY+detPos+detOff+end+del;
+        return start+name+wl+wlS+att+guide+guideAp+bStop+bStopX+bStopY+bCentX+bCentY+detPos+detOff+end+align+del;
     };
     
     makeObject = function() {
@@ -175,6 +177,7 @@ $(function() {
            object.push(obj);
         }
         configurations = object;
+        localStorage.setItem('configurations', JSON.stringify(configurations));
         return object;
     };
     
@@ -183,10 +186,44 @@ $(function() {
         drawTable(configs);
     };
     
-    deleteRow = function(ev) {
+    deleteRow = function(n) {
         var table = document.getElementById('config_table');
-        table.deleteRow(ev);
+        table.deleteRow(n);
         redrawTable();
+    };
+    
+    alignRow = function(n) {
+        localStorage.numb = n;
+        localStorage.setItem('configurations', JSON.stringify(configurations));
+        window.open("alignpanel.html");
+    };
+    
+    alignTable = function(config) {
+        var table=document.getElementById('alignTable');
+        var tabRow0 = "<tr><td>Beam Stop X</td><td>Beam Stop Y</td></tr>";
+        var tabRow1 = "";
+        if (config.beamStopX < -10) {
+            tabRow1 = "<tr><td><input type='text' onchange=getAlign() disabled=true value="+config.beamStopX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamStopY+" /></td></tr>";
+        } else {
+            tabRow1 = "<tr><td><input type='text' onchange=getAlign() value="+config.beamStopX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamStopY+" /></td></tr>";
+        }
+        var tabRow2 = "<tr><td>Beam Cneter X</td><td>Beam Center Y</td></tr>";
+        var tabRow3 = "<tr><td><input type='text' onchange=getAlign() value="+config.beamCenterX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamCenterY+" /></td></tr>";
+        table.insertRow(0).innerHTML = tabRow0;
+        table.insertRow(1).innerHTML = tabRow1;
+        table.insertRow(2).innerHTML = tabRow2;
+        table.insertRow(3).innerHTML = tabRow3;
+    };
+    
+    getAlign = function() {
+        var newTable= document.getElementById('alignTable');
+        var newconfig = JSON.parse(localStorage.configurations);
+        var n = localStorage.numb - 1;
+        newconfig[n].beamStopX = parseInt(newTable.rows[1].cells[0].firstChild.value);
+        newconfig[n].beamStopY = parseInt(newTable.rows[1].cells[1].firstChild.value);
+        newconfig[n].beamCenterX = parseInt(newTable.rows[3].cells[0].firstChild.value);
+        newconfig[n].beamCenterY = parseInt(newTable.rows[3].cells[1].firstChild.value);
+        localStorage.setItem('configurations', JSON.stringify(newconfig));
     };
         
 });

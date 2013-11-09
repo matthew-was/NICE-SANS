@@ -14,6 +14,7 @@ and open the template in the editor.
         <script>
             $(function() {
                 configurations = [];
+                localStorage.setItem('configurations', JSON.stringify(configurations));
                 
                 window.onload = function() {
                     configurations = [];
@@ -33,6 +34,7 @@ and open the template in the editor.
                         detectorOffset:0
                     };
                     configurations.push(config);
+                    localStorage.setItem('configurations', JSON.stringify(configurations));
                     drawTable(configurations);
                 };
                
@@ -54,6 +56,7 @@ and open the template in the editor.
                         detectorOffset:0
                     };
                     configurations.push(config);
+                    localStorage.setItem('configurations', JSON.stringify(configurations));
                     drawTable(configurations);
                 });
                 
@@ -62,8 +65,9 @@ and open the template in the editor.
                     console.log(configuration);
                 });
                 
-                $( "#alignButton" ).click(function() {
-                    console.log("align");
+                $( "#updateButton" ).click(function() {
+                    var configs = JSON.parse(localStorage.configurations);
+                    drawTable(configs);
                 });
                 
             });
@@ -94,7 +98,7 @@ and open the template in the editor.
                 <div id="buttonsplace">
                     <input type="button" class="controlbutton" value="+" id="addButton"/>
                     <input type="button" class="controlbutton" value="Set" id="setButton"/>
-                    <input type="button" class="controlbutton" value="Align" id="alignButton"/>
+                    <input type="button" class="controlbutton" value="Update" id="updateButton"/>
                 </div>
             </div>
         </div>
