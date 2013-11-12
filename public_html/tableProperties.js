@@ -209,10 +209,14 @@ $(function() {
         }
         var tabRow2 = "<tr><td>Beam Cneter X</td><td>Beam Center Y</td></tr>";
         var tabRow3 = "<tr><td><input type='text' onchange=getAlign() value="+config.beamCenterX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamCenterY+" /></td></tr>";
+        var tabRow4 = "<tr><td>Sample Position</td></tr>";
+        var tabRow5 = "<tr><td><input type='text' onchange=getAlign() value = 0 /></td></tr>";
         table.insertRow(0).innerHTML = tabRow0;
         table.insertRow(1).innerHTML = tabRow1;
         table.insertRow(2).innerHTML = tabRow2;
         table.insertRow(3).innerHTML = tabRow3;
+        table.insertRow(4).innerHTML = tabRow4;
+        table.insertRow(5).innerHTML = tabRow5;
     };
     
     getAlign = function() {
