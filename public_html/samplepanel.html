@@ -12,15 +12,31 @@ and open the template in the editor.
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
             $(function() {
+                sessionStorage.samNames = [];
+                
+                window.onload = function() {
+                    console.log("Loaded");
+                };
+                
+                reloadTable = function() {
+                    console.log("Reload");
+                };
 
             });
         </script>
         <style>
             #content {position: relative; height: 500px; width: 500px; background-color: lightgray;}
+            #changer {position: relative; top: 10px; left: 10px; width:75px;}
+            .samChange {}
         </style>
     </head>
     <body>
         <div id="content">
+            <select id="changer" onchange=reloadTable();>
+                <option class="samChange" value="10CB" selected="selected">10CB</option>
+                <option class="samChange" value="9P">9P</option>
+                <option class="samChange" value="7HB">7HB</option>
+            </select>
             
         </div>
     </body>

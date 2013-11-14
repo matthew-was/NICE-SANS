@@ -230,4 +230,4 @@ $(function() {
         localStorage.setItem('configurations', JSON.stringify(newconfig));
     };
         
-});
+});$;
