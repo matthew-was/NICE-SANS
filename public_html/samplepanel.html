@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Align Panel</title>
+        <title>Sample Panel</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
@@ -9,8 +9,6 @@
         <script src=samples.js></script>
         <script>
             $(function() {
-                sessionStorage.samNames = [];
-                
                 window.onload = function() {
                     drawTable();
                 };
@@ -18,26 +16,64 @@
                 reloadTable = function() {
                     drawTable();
                 };
+                
+                $( "#detailButton" ).click(function(){
+                    document.getElementById('sdetail').hidden=false;
+                    document.getElementById('stimes').hidden=true;
+                });
+
+                $( "#timesButton" ).click(function(){
+                    document.getElementById('sdetail').hidden=true;
+                    document.getElementById('stimes').hidden=false;
+                });
 
             });
         </script>
         <style>
             #content { height: 500px; width: 500px; background-color: lightgray; overflow: auto;}
+            #head {position: relative; height: 50px; width: 100%}
             #changer {position: relative; top: 10px; left: 10px; width:75px;}
-            .samChange {}
-            #sampTable {position: relative; top: 10px; text-align: center}
-            #sampTable td {border: 1px solid black}
-            .ic2 {width: 500px}
+            #sname {position: relative; height: 360px; width: 160px}
+            #sampNames {text-align: center; border-collapse: collapse}
+            #sampNames td {border: 1px solid black}
+            #sdetail {position: absolute; top:58px; left:164px; height: 360px; width:310px}
+            #sampDetail {text-align: center; border-collapse: collapse}
+            #sampDetail td {border: 1px solid black}
+            #stimes {position: absolute; top:58px; left:164px; height: 360px; width:310px}
+            #sampTimes {text-align: center; border-collapse: collapse}
+            #sampTimes td {border: 1px solid black}
+            .sCol1 {width:16px; padding-left: 10px; padding-right: 10px}
+            .sic2 {width: 100px; margin-left: 5px; margin-right: 5px; text-align: center}
+            .dic3 {width: 40px; text-align: center}
+            .dic4 {width: 150px; margin-left: 5px; margin-right: 5px; text-align: center}
+            .dic5 {width: 40px; margin-left: 5px; margin-right: 5px; text-align: center}
+            .tbox {width:40px; text-align: center}
+            #row1 {height:49px}
+            #row2 {height: 23px}
         </style>
     </head>
     <body>
         <div id="content">
-            <select id="changer" onchange=reloadTable();>
-                <option class="samChange" value="10CB" selected="selected">10CB</option>
-                <option class="samChange" value="9P">9P</option>
-                <option class="samChange" value="7HB">7HB</option>
-            </select>
-            <table id="sampTable"></table>
+            <div id="head">
+                <select id="changer" onchange=reloadTable();>
+                    <option value="10CB" selected="selected">10CB</option>
+                    <option value="9P">9P</option>
+                    <option value="7HB">7HB</option>
+                </select>
+            </div>
+            <div id="sname">
+                <table id="sampNames"></table>
+            </div>
+            <div id="sdetail">
+                <table id="sampDetail"></table>
+            </div>
+            <div id="stimes" hidden="hidden">
+                <table id="sampTimes"></table>
+            </div>
+            <div id="buttons">
+                <input type="button" id="detailButton" value="Show Details"/>
+                <input type="button" id="timesButton" value="Show Times"/>
+            </div>
         </div>
     </body>
 </html>
