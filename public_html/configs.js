@@ -6,7 +6,7 @@
 $(function() {
     
     drawTable = function(configuration) {
-        table = document.getElementById('config_table');
+        var table = document.getElementById('config_table');
         var rowNum = table.rows.length;
         if (rowNum !== 0){
             for( var i = 0; i<rowNum; i++) {

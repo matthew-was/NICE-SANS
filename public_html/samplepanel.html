@@ -1,7 +1,3 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,16 +6,17 @@ and open the template in the editor.
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src=samples.js></script>
         <script>
             $(function() {
                 sessionStorage.samNames = [];
                 
                 window.onload = function() {
-                    console.log("Loaded");
+                    drawTable();
                 };
                 
                 reloadTable = function() {
-                    console.log("Reload");
+                    drawTable();
                 };
 
             });
@@ -37,7 +34,7 @@ and open the template in the editor.
                 <option class="samChange" value="9P">9P</option>
                 <option class="samChange" value="7HB">7HB</option>
             </select>
-            
+            <table id="sampTable"></table>
         </div>
     </body>
 </html>
