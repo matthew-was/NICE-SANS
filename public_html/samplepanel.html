@@ -9,6 +9,8 @@
         <script src=samples.js></script>
         <script>
             $(function() {
+                localStorage.samNames = [];
+                
                 window.onload = function() {
                     drawTable();
                 };
@@ -25,6 +27,14 @@
                 $( "#timesButton" ).click(function(){
                     document.getElementById('sdetail').hidden=true;
                     document.getElementById('stimes').hidden=false;
+                });
+
+                $( "#seButton" ).click(function(){
+                    window.open("sepanel.html");
+                });
+
+                $( "#advancedButton" ).click(function(){
+                    window.open("advancedpanel.html");
                 });
 
             });
@@ -73,6 +83,8 @@
             <div id="buttons">
                 <input type="button" id="detailButton" value="Show Details"/>
                 <input type="button" id="timesButton" value="Show Times"/>
+                <input type="button" id="seButton" value="Sample Environments"/>
+                <input type="button" id="advancedButton" value="Advanced"/>
             </div>
         </div>
     </body>

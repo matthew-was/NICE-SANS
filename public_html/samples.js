@@ -63,13 +63,22 @@ $( function() {
         for (var i=0; i<numSamps; i++) {
             var j = i+1;
             
-            var sNRowN = "<tr><td class='sCol1'>"+j+"</td><td class='sCol2'><input type=text class='sic2' /></td></tr>";
+            var sNRowN = "<tr><td class='sCol1'>"+j+"</td><td class='sCol2'><input type=text class='sic2' onchange='getSamples()' /></td></tr>";
             var sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text class='dic4'/></td><td class='dCol5'><input type=text class='dic5'/></td></tr>";
             var sTRowN = "<tr><td><input type=text class='tbox' value=0 /></td><td><input type=text class='tbox' value=0 /></td><td><input type=text class='tbox' value=0 /></td><td><input type=text class='tbox' value=0 /></td><td><input type=text class='tbox' value=0 /></td><td><input type=text class='tbox' value=0 /></td></tr>";
             sNTable.insertRow(j+2).innerHTML = sNRowN;
             sDTable.insertRow(j+2).innerHTML = sDRowN;
             sTTable.insertRow(j+2).innerHTML = sTRowN;
         }
+    };
+    
+    getSamples = function() {
+        var samCol = document.getElementsByClassName('sic2');
+        var samNames = [];
+        for (var i=0; i<samCol.length; i++) {
+            samNames[i] = samCol[i].value;
+        }
+        localStorage.samNames = samNames;
     };
     
 });
