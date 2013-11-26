@@ -60,20 +60,14 @@ and open the template in the editor.
                     drawTable(configurations);
                 });
                 
-                $( "#setButton" ).click(function() {
-                    var configuration = makeObject();
-                    console.log(configuration);
+                $( "#loadButton" ).click(function() {
+                    console.log("Load Configuration File");
                 });
-                
-                $( "#updateButton" ).click(function() {
-                    var configs = JSON.parse(localStorage.configurations);
-                    drawTable(configs);
-                });
-                
+                               
             });
         </script>
         <style>
-            #content {position: relative; height:500px; width: 500px;background-color: lightgray; overflow:auto}
+            #content {position: relative; height:500px; background-color: lightgray; overflow:auto}
             #configs {position: relative; margin-top: 30px;}
             
             #config_table {table-layout:fixed; width: 200px;  border-collapse: separate; border-spacing: 1px 10px;}
@@ -96,9 +90,8 @@ and open the template in the editor.
             </div>
             <div id="buttons">
                 <div id="buttonsplace">
-                    <input type="button" class="controlbutton" value="+" id="addButton"/>
-                    <input type="button" class="controlbutton" value="Set" id="setButton"/>
-                    <input type="button" class="controlbutton" value="Update" id="updateButton"/>
+                    <input type="button" class="controlbutton" value="Add" id="addButton"/>
+                    <input type="button" class="controlbutton" value="Load" id="loadButton"/>
                 </div>
             </div>
         </div>

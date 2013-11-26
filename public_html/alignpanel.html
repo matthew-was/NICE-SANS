@@ -21,22 +21,23 @@ and open the template in the editor.
                 });
                 
                 $('#scatRun').click( function() {
-                    console.log("Run a scattering run for 10s");
+                    var newTable= document.getElementById('alignTable');
+                    var samPos = newTable.rows[5].cells[0].firstChild.value;
+                    var time = newTable.rows[5].cells[1].firstChild.value;
+                    console.log("Run a scattering run in position "+samPos+" for "+time+"s");
                 });
                 
                 $('#transRun').click( function() {
-                    console.log("Run a transmission run for 180s");
+                    var newTable= document.getElementById('alignTable');
+                    var samPos = newTable.rows[5].cells[0].firstChild.value;
+                    var time = newTable.rows[5].cells[1].firstChild.value;
+                    console.log("Run a transmission run in position "+samPos+" for "+time+"s");
                 });
                 
                 window.onload = function() {
                     var n = localStorage.numb;
                     configurations = JSON.parse(localStorage.configurations);
                     alignTable(configurations[n-1]);
-                    if (configurations[n-1].beamStopX < -10) {
-                        document.getElementById('scatRun').disabled=true;
-                    } else {
-                        document.getElementById('transRun').disabled=true;                        
-                    }
                 };
             });
         </script>
