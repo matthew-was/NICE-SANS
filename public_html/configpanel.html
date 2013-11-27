@@ -64,6 +64,10 @@ and open the template in the editor.
                     console.log("Load Configuration File");
                 });
                                
+                $( "#saveButton" ).click(function() {
+                    console.log("Save Configuration File");
+                });
+                               
             });
         </script>
         <style>
@@ -92,6 +96,7 @@ and open the template in the editor.
                 <div id="buttonsplace">
                     <input type="button" class="controlbutton" value="Add" id="addButton"/>
                     <input type="button" class="controlbutton" value="Load" id="loadButton"/>
+                    <input type="button" class="controlbutton" value="Save" id="saveButton"/>
                 </div>
             </div>
         </div>
