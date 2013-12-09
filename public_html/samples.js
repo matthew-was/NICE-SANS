@@ -117,8 +117,8 @@ $( function() {
                 col[i].value = 0;
                 col[i].hidden = true;
             }
-            btn[0].value="Release";
-        } else if (btn[0].value === "Release") {
+            btn[0].value="Show";
+        } else if (btn[0].value === "Show") {
             for (var i=0; i<col.length; i++) {
                 col[i].hidden = false;
             }

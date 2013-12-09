@@ -37,10 +37,14 @@
                     window.open("advancedpanel.html");
                 });
                 
+                $( "#writeTrajButton" ).click(function(){
+                    console.log("Write Trajectory");
+                });
+                
             });
         </script>
         <style>
-            #content { background-color: lightgray; overflow: auto; height:500px}
+            #content { background-color: lightgray; overflow: auto;}
             #head {position: relative; height: 50px; width: 100%}
             #changer {position: relative; top: 10px; left: 10px; width:75px;}
             #sname {position: relative; height: 360px; width: 160px}
@@ -61,7 +65,7 @@
             #tbox {width:40px; text-align: center}
             #row1 {height:49px}
             #row2 {height: 23px}
-            #buttons {position: absolute; top: 460px;}
+            #buttons {position: relative; margin-top: 30px; margin-bottom: 20px}
         </style>
     </head>
     <body>
@@ -87,6 +91,7 @@
                 <input type="button" id="timesButton" value="Show Times"/>
                 <input type="button" id="seButton" value="Sample Environments"/>
                 <input type="button" id="advancedButton" value="Advanced"/>
+                <input type="button" id="writeTrajButton" value="Write Trajectory"/>
             </div>
         </div>
     </body>

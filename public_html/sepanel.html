@@ -9,14 +9,46 @@
         <script src=samples.js></script>
         <script>
             $(function() {
+
+                $("#writeTrajButton").click(function() {
+                    console.log("Write Trajectory");
+                });
+                
+                $("#environment").change(function() {
+                    var selectNum = document.getElementById('environment').selectedIndex;
+                    switch(selectNum) {
+                        case 0:
+                            console.log("Temperature");
+                            break;
+                        case 1:
+                            console.log("Magnetic Field");
+                            break;
+                        case 2:
+                            console.log("Both");
+                            break;
+                    }
+                });
+
             });
         </script>
         <style>
-            #content { background-color: lightgray; overflow: auto;}
+            #content {background-color: lightgray; overflow: auto;}
+            #environment {position: relative; margin: 15px}
+            #writeTrajButton {position: relative; margin: 15px}
         </style>
     </head>
     <body>
         <div id="content">
+            <div id="seChoice">
+                <select id="environment">
+                    <option value="temp">Temperature</option>
+                    <option value="mag">Magnetic Field</option>
+                    <option value="both">Both</option>
+                </select>            </div>
+            <div id="selector"></div>
+            <div id="buttons">
+                <input type="Button" id="writeTrajButton" value="Write Trajectory"/>
+            </div>
         </div>
     </body>
 </html>
