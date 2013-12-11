@@ -126,4 +126,57 @@ $( function() {
         }
     };
     
+    updateSelectList = function() {
+        var index = document.getElementById('choice').selectedIndex;
+        var selected;
+        switch (index) {
+            case 0:
+                selected = "none";
+                break;
+            case 1:
+                selected = "temp";
+                break;
+            case 2:
+                selected = "mag";
+                break;
+            case 3:
+                selected = "both";
+                break;
+        }
+        
+        var templine1 = "<tr><td colspan=4 id='selHead'>Temperature</td></tr>";
+        var templine2 = "<tr><td>Set Temperature to </td><td><input type='number' id='advTemp'/></td><td></td><td><input type='button' id=advTPush value='->'/></td></tr>";
+        var templine3 = "<tr></tr>";
+
+        var magline1 = "<tr><td colspan=4 id='selHead'>Magnetic Field</td></tr>";
+        var magline2 = "<tr><td>Set Magnetic Field to </td><td><input type='number' id='advMag'/></td><td></td><td><input type='button' id=advMPush value='->'/></td></tr>";
+        var magline3 = "<tr></tr>";
+        
+        var confline1 = "<tr><td colspan=4 id='selHead'>Configuration</td></tr>";
+        var confline2 = "<tr><td>Choose Configurations to Run</td><td>(1.1m5, 1.1m5t, 5m5, 5m5t, 5m14, 5m14t)</td><td><input type='text' id=advConf/></td><td><input type='button' id=advCPush value='->'/></td></tr>";
+        var confline3 = "<tr><td</tr>";
+        
+        var sampline1 = "<tr><td colspan=4 id='selHead'>Sample</td></tr>";
+        var sampline2 = "<tr><td>Choose Which Samples to Run</td><td>1 to 10</td><td><input type='text' id='advSamp'/></td><td><input type='button' id=advSPush value='->'/></td></tr>";
+        var sampline3 = "<tr><td colspan=4 id='selBottom'></td></tr>";
+        
+        var selTable = document.getElementById('selectTable');
+        
+        selTable.insertRow(0).innerHTML = templine1;
+        selTable.insertRow(1).innerHTML = templine2;
+        selTable.insertRow(2).innerHTML = templine3;
+        selTable.insertRow(3).innerHTML = magline1;
+        selTable.insertRow(4).innerHTML = magline2;
+        selTable.insertRow(5).innerHTML = magline3;
+        selTable.insertRow(6).innerHTML = confline1;
+        selTable.insertRow(7).innerHTML = confline2;
+        selTable.insertRow(8).innerHTML = confline3;
+        selTable.insertRow(9).innerHTML = sampline1;
+        selTable.insertRow(10).innerHTML = sampline2;
+        selTable.insertRow(11).innerHTML = sampline3;
+                
+        var selHeight = $('#selector').height();
+        $('#list').height(selHeight);
+    };
+    
 });

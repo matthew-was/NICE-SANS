@@ -9,14 +9,52 @@
         <script src=samples.js></script>
         <script>
             $(function() {
+
+                window.onload = updateSelectList();
+
+                $('#choice').change(function() {
+                    updateSelectList();
+                });
+
             });
         </script>
         <style>
             #content { background-color: lightgray; overflow: auto;}
+            #selectorList {width: 90%; margin: 10px;}
+            #selector { width:55%; float: left;}
+            #list {float: left; width: 35%;}
+            #endButtons {display: inline-block; width: 90%; margin: 10px;}
+            #selHead {border-top: 1px solid black}
+            #selBottom {border-bottom: 1px solid black}
+            #listArea {width: 100%; height: 100%}
         </style>
     </head>
     <body>
         <div id="content">
+            <div id="selectorList">
+                <select id="choice">
+                    <option value="none">None</option>
+                    <option value="temp">Temperature</option>
+                    <option value="mag">Magnetism</option>
+                    <option value="both">Both</option>
+                </select>
+            </div>
+            <div id="selector">
+                <table id="selectTable"></table>
+            </div>
+            <div id="list">
+                <textarea id="listArea">
+                    <!-- TODO: 
+                    updateSelectList needs clean up
+                    push buttons don't push
+                    text area overflow, no manual resize 
+                    -->
+                </textarea>
+            </div>
+            <div id="endButtons">
+                <input type="button" id="writeTrajButton" value="Write Trajectory"/>
+                <input type="button" id="clearList" value="Clear List"/>
+            </div>
         </div>
     </body>
 </html>
