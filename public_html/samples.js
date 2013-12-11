@@ -144,39 +144,183 @@ $( function() {
                 break;
         }
         
-        var templine1 = "<tr><td colspan=4 id='selHead'>Temperature</td></tr>";
-        var templine2 = "<tr><td>Set Temperature to </td><td><input type='number' id='advTemp'/></td><td></td><td><input type='button' id=advTPush value='->'/></td></tr>";
-        var templine3 = "<tr></tr>";
+        var templine1 = "<tr><td colspan=3 id='selHead'>Temperature</td></tr>";
+        var templine2 = "<tr><td>Set Temperature to </td><td><input type='number' id='advTemp'/></td><td><input type='button' id='advTPush' value='->'/></td></tr>";
+        var templine3 = "<tr><td>Wait for Temperature Equilibration</td><td><input type='number' id='advTHold'/></td><td><input type='button' id='advTHPush' value='->'/></td></tr>";
+        var templine4 = "<tr></tr>";
 
-        var magline1 = "<tr><td colspan=4 id='selHead'>Magnetic Field</td></tr>";
-        var magline2 = "<tr><td>Set Magnetic Field to </td><td><input type='number' id='advMag'/></td><td></td><td><input type='button' id=advMPush value='->'/></td></tr>";
-        var magline3 = "<tr></tr>";
+        var magline1 = "<tr><td colspan=3 id='selHead'>Magnetic Field</td></tr>";
+        var magline2 = "<tr><td>Set Magnetic Field to </td><td><input type='number' id='advMag'/></td><td><input type='button' id=advMPush value='->'/></td></tr>";
+        var magline3 = "<tr><td>Wait for Magnet Equilibration</td><td><input type='number' id='advMHold'/></td><td><input type='button' id='advMHPush' value='->'/></td></tr>";
+        var magline4 = "<tr></tr>";
         
-        var confline1 = "<tr><td colspan=4 id='selHead'>Configuration</td></tr>";
-        var confline2 = "<tr><td>Choose Configurations to Run</td><td>(1.1m5, 1.1m5t, 5m5, 5m5t, 5m14, 5m14t)</td><td><input type='text' id=advConf/></td><td><input type='button' id=advCPush value='->'/></td></tr>";
+        var confline1 = "<tr><td colspan=3 id='selHead'>Configuration</td></tr>";
+        var confline2 = "<tr><td>Choose Configurations to Run</td><td><input type='text' id='advConf' /></td><td><input type='button' id=advCPush value='->'/></td></tr>";
         var confline3 = "<tr><td</tr>";
         
-        var sampline1 = "<tr><td colspan=4 id='selHead'>Sample</td></tr>";
-        var sampline2 = "<tr><td>Choose Which Samples to Run</td><td>1 to 10</td><td><input type='text' id='advSamp'/></td><td><input type='button' id=advSPush value='->'/></td></tr>";
-        var sampline3 = "<tr><td colspan=4 id='selBottom'></td></tr>";
+        var sampline1 = "<tr><td colspan=3 id='selHead'>Sample</td></tr>";
+        var sampline2 = "<tr><td>Choose Which Samples to Run (by Index)</td><td><input type='text' id='advSamp' /></td><td><input type='button' id=advSPush value='->'/></td></tr>";
+        var sampline3 = "<tr><td colspan=3 id='selBottom'></td></tr>";
         
         var selTable = document.getElementById('selectTable');
+        var selRows = selTable.rows.length;
         
-        selTable.insertRow(0).innerHTML = templine1;
-        selTable.insertRow(1).innerHTML = templine2;
-        selTable.insertRow(2).innerHTML = templine3;
-        selTable.insertRow(3).innerHTML = magline1;
-        selTable.insertRow(4).innerHTML = magline2;
-        selTable.insertRow(5).innerHTML = magline3;
-        selTable.insertRow(6).innerHTML = confline1;
-        selTable.insertRow(7).innerHTML = confline2;
-        selTable.insertRow(8).innerHTML = confline3;
-        selTable.insertRow(9).innerHTML = sampline1;
-        selTable.insertRow(10).innerHTML = sampline2;
-        selTable.insertRow(11).innerHTML = sampline3;
+        if (selRows !== 0) {
+            for (var i = 0; i < selRows; i++) {
+                selTable.deleteRow();
+            }
+        }
+        var csNum;
+        if (selected === "none") {
+            csNum = 0;
+        } else if (selected === "temp") {
+            csNum = 4;
+            selTable.insertRow(0).innerHTML = templine1;
+            selTable.insertRow(1).innerHTML = templine2;
+            selTable.insertRow(2).innerHTML = templine3;
+            selTable.insertRow(3).innerHTML = templine4;
+        } else if (selected === "mag") {
+            csNum = 4;
+            selTable.insertRow(0).innerHTML = magline1;
+            selTable.insertRow(1).innerHTML = magline2;
+            selTable.insertRow(2).innerHTML = magline3;
+            selTable.insertRow(3).innerHTML = magline4;
+        } else if (selected === "both") {
+            csNum = 8;
+            selTable.insertRow(0).innerHTML = templine1;
+            selTable.insertRow(1).innerHTML = templine2;
+            selTable.insertRow(2).innerHTML = templine3;
+            selTable.insertRow(3).innerHTML = templine4;
+            selTable.insertRow(4).innerHTML = magline1;
+            selTable.insertRow(5).innerHTML = magline2;
+            selTable.insertRow(6).innerHTML = magline3;
+            selTable.insertRow(7).innerHTML = magline4;
+        }
+        
+        selTable.insertRow(csNum).innerHTML = confline1;
+        selTable.insertRow(csNum+1).innerHTML = confline2;
+        selTable.insertRow(csNum+2).innerHTML = confline3;
+        selTable.insertRow(csNum+3).innerHTML = sampline1;
+        selTable.insertRow(csNum+4).innerHTML = sampline2;
+        selTable.insertRow(csNum+5).innerHTML = sampline3;
                 
         var selHeight = $('#selector').height();
-        $('#list').height(selHeight);
+        var selHelpHeight = $('#selectorHelp').height();
+        if (selHeight > selHelpHeight) {
+            $('#list').height(selHeight);
+        } else {
+            $('#list').height(selHelpHeight);
+        }
+
+        $('#advConf').focus(function() {
+            writeSHelp(this.id);
+        });
+
+        $('#advConf').blur(function() {
+            clearSHelp();
+        });
+
+        $('#advSamp').focus(function() {
+            writeSHelp(this.id);
+        });
+
+        $('#advSamp').blur(function() {
+            clearSHelp();
+        });
+        
+        $('#advTPush').click(function(event){
+            pushinfo(this.id);
+        });
+
+        $('#advTHPush').click(function(event){
+            pushinfo(this.id);
+        });
+
+        $('#advMPush').click(function(event){
+            pushinfo(this.id);
+        });
+
+        $('#advMHPush').click(function(event){
+            pushinfo(this.id);
+        });
+
+        $('#advCPush').click(function(event){
+            pushinfo(this.id);
+        });
+
+        $('#advSPush').click(function(event){
+            pushinfo(this.id);
+        });
+
+    };
+    
+    writeSHelp = function(input) {
+        var helpArea = document.getElementById('sHelp');
+        
+        switch (input) {
+            case "advConf":
+                helpArea.innerHTML = "Available Configurations are:<br>1.1m5<br>1.1m5t<br>5m5<br>5m5t<br>5m14<br>5m14t";
+                break;
+            case "advSamp":
+                helpArea.innerHTML = "Available Samples are<br><table id='sampHelp'><tr><th>Index</th><th>Sample Name</th></tr><tr><td>1</td><td>Sample 1</td></tr><tr><td>2</td><td>Sample 2</td></tr><tr><td>3</td><td>Sample 3</td></tr><tr><td>4</td><td>Sample 4</td></tr><tr><td>5</td><td>Sample 5</td></tr><tr><td>6</td><td>Sample 6</td></tr><tr><td>7</td><td>Sample 7</td></tr><tr><td>8</td><td>Sample 8</td></tr><tr><td>9</td><td>Sample 9</td></tr><tr><td>10</td><td>Sample 10</td></tr></table>";
+        }
+
+        var selHeight = $('#selector').height();
+        var selHelpHeight = $('#selectorHelp').height();
+        if (selHeight > selHelpHeight) {
+            $('#list').height(selHeight);
+        } else {
+            $('#list').height(selHelpHeight);
+        }
+    };
+    
+    clearSHelp = function() {
+        var confHelp = document.getElementById('sHelp');
+        confHelp.innerHTML = "";
+        var selHeight = $('#selector').height();
+        var selHelpHeight = $('#selectorHelp').height();
+        if (selHeight > selHelpHeight) {
+            $('#list').height(selHeight);
+        } else {
+            $('#list').height(selHelpHeight);
+        }
+    };
+    
+    pushinfo = function(buttonId) {
+        var lineinfo;
+        
+        switch (buttonId) {
+            case "advTPush":
+                lineinfo = "Set Temperature to " + document.getElementById('advTemp').value + "°C. <input type='button' id='delLi' value='Delete'/>";
+                break;
+            case "advTHPush":
+                lineinfo = "Hold for " +document.getElementById('advTHold').value + "seconds. <input type='button' id='delLi' value='Delete'/>";
+                break;
+            case "advMPush":
+                lineinfo = "Set Magnetic Field to " +document.getElementById('advMag').value + ". <input type='button' id='delLi' value='Delete'/>";
+                break;
+            case "advMHPush":
+                lineinfo = "Hold for " +document.getElementById('advMHold').value + "seconds. <input type='button' id='delLi' value='Delete'/>";
+                break;
+            case "advCPush":
+                lineinfo = "Run at configuration(s) " +document.getElementById('advConf').value + "<input type='button' id='delLi' value='Delete'/>";
+                break;
+            case "advSPush":
+                lineinfo = "Measure sample(s) " +document.getElementById('advSamp').value + " <input type='button' id='delLi' value='Delete'/>";
+                break;
+        }
+        
+        var list = document.getElementById('runList');
+        var newLi = document.createElement("LI");
+        list.appendChild(newLi);
+        newLi.innerHTML = lineinfo;
+        
+//        $('#delLi').click(function(){
+//            console.log("1");
+//            var test = $(this).parent();
+//            console.log(test);
+//            $(this).parent().remove();
+//        });
     };
     
 });
