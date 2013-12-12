@@ -43,25 +43,19 @@ $( function() {
         
         var sNRow0 = "<tr><th colspan=2>Sample</th></tr>";
         var sNRow1 = "<tr><td id='row1' class='col1'></td><td class='col2'>Name</td></tr>";
-        var sNRow2 = "<tr></tr>";
         var sDRow0 = "<tr><th colspan=3>Details</th></tr>";
-        var sDRow1 = "<tr><td id='row1' class='col3'>Thickness (mm)</td><td class='col4'>Aperture (mm)</td><td class='col5'>Description</td><td class='col6'>Mass (g)</td></tr>";
-        var sDRow2 = "<tr></tr>";
+        var sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col4'>Aperture (mm)</td><td class='col5'>Description</td><td class='col6'>Mass (g)</td></tr>";
         var sTRow0 = "<tr><th colspan=6>Times</th></tr>";
-        var sTRow1 = "<tr><td id='row2' colspan=2>1.1m5</td><td colspan=2>5m5</td><td colspan=2>5m14</td></tr>";
-        var sTRow2 = "<tr><td id='row2'>Scatt</td><td>Trans</td><td id='row2'>Scatt</td><td>Trans</td><td id='row2'>Scatt</td><td>Trans</td></tr>";
+        var sTRow1 = "<tr><td id='row1'>1.1m5</td><td>1.1m5t</td><td>5m5</td><td>5m5t</td><td>5m14</td><td>5m14t</td></tr>";
         sNTable.insertRow(0).innerHTML = sNRow0;
         sNTable.insertRow(1).innerHTML = sNRow1;
-        sNTable.insertRow(2).innerHTML = sNRow2;
         sDTable.insertRow(0).innerHTML = sDRow0;
         sDTable.insertRow(1).innerHTML = sDRow1;
-        sDTable.insertRow(2).innerHTML = sDRow2;
         sTTable.insertRow(0).innerHTML = sTRow0;
         sTTable.insertRow(1).innerHTML = sTRow1;
-        sTTable.insertRow(2).innerHTML = sTRow2;
         
         for (var i=0; i<numSamps; i++) {
-            var j = i+1;
+            var j = i;
             
             var sNRowN = "<tr><td class='sCol1'>"+j+"</td><td class='sCol2'><input type=text class='sic2' onchange='getSamples()' /></td></tr>";
             var sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text class='dic4' value=12.7 /></td><td class='dCol5'><input type=text class='dic5'/></td><td class='dCol6'><input type=text class='dic6'/></td></tr>";
@@ -74,9 +68,9 @@ $( function() {
         var sdButtonRow = "<tr><td class='dbCol3'><input type=button class='dbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='dbCol4'><input type=button class='dbtn4' value='Fill' onclick=fillButton(this.className) /></td></tr>";
         var stButtonRow1 = "<tr><td class='tbCol3'><input type=button id ='fbtn' class='fbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol4'><input type=button id ='fbtn' class='fbtn4' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol5'><input type=button id ='fbtn' class='fbtn5' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol6'><input type=button id ='fbtn' class='fbtn6' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol7'><input type=button id ='fbtn' class='fbtn7' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol8'><input type=button id ='fbtn' class='fbtn8' value='Fill' onclick=fillButton(this.className) /></td></tr>";
         var stButtonRow2 = "<tr><td class='tbCol3'><input type=button class='hbtn3' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol4'><input type=button class='hbtn4' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol5'><input type=button class='hbtn5' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol6'><input type=button class='hbtn6' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol7'><input type=button class='hbtn7' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol8'><input type=button class='hbtn8' value='Hide' onclick=hideButton(this.className) /></td></tr>";
-        sDTable.insertRow(numSamps+3).innerHTML = sdButtonRow;
-        sTTable.insertRow(numSamps+3).innerHTML = stButtonRow1;
-        sTTable.insertRow(numSamps+4).innerHTML = stButtonRow2;
+        sDTable.insertRow(numSamps+2).innerHTML = sdButtonRow;
+        sTTable.insertRow(numSamps+2).innerHTML = stButtonRow1;
+        sTTable.insertRow(numSamps+3).innerHTML = stButtonRow2;
     };
     
     getSamples = function() {
@@ -204,13 +198,13 @@ $( function() {
         selTable.insertRow(csNum+4).innerHTML = sampline2;
         selTable.insertRow(csNum+5).innerHTML = sampline3;
                 
-        var selHeight = $('#selector').height();
-        var selHelpHeight = $('#selectorHelp').height();
-        if (selHeight > selHelpHeight) {
-            $('#list').height(selHeight);
-        } else {
-            $('#list').height(selHelpHeight);
-        }
+//        var selHeight = $('#selector').height();
+//        var selHelpHeight = $('#selectorHelp').height();
+//        if (selHeight > selHelpHeight) {
+//            $('#list').height(selHeight);
+//        } else {
+//            $('#list').height(selHelpHeight);
+//        }
 
         $('#advConf').focus(function() {
             writeSHelp(this.id);
@@ -265,25 +259,25 @@ $( function() {
                 helpArea.innerHTML = "Available Samples are<br><table id='sampHelp'><tr><th>Index</th><th>Sample Name</th></tr><tr><td>1</td><td>Sample 1</td></tr><tr><td>2</td><td>Sample 2</td></tr><tr><td>3</td><td>Sample 3</td></tr><tr><td>4</td><td>Sample 4</td></tr><tr><td>5</td><td>Sample 5</td></tr><tr><td>6</td><td>Sample 6</td></tr><tr><td>7</td><td>Sample 7</td></tr><tr><td>8</td><td>Sample 8</td></tr><tr><td>9</td><td>Sample 9</td></tr><tr><td>10</td><td>Sample 10</td></tr></table>";
         }
 
-        var selHeight = $('#selector').height();
-        var selHelpHeight = $('#selectorHelp').height();
-        if (selHeight > selHelpHeight) {
-            $('#list').height(selHeight);
-        } else {
-            $('#list').height(selHelpHeight);
-        }
+//        var selHeight = $('#selector').height();
+//        var selHelpHeight = $('#selectorHelp').height();
+//        if (selHeight > selHelpHeight) {
+//            $('#list').height(selHeight);
+//        } else {
+//            $('#list').height(selHelpHeight);
+//        }
     };
     
     clearSHelp = function() {
         var confHelp = document.getElementById('sHelp');
         confHelp.innerHTML = "";
-        var selHeight = $('#selector').height();
-        var selHelpHeight = $('#selectorHelp').height();
-        if (selHeight > selHelpHeight) {
-            $('#list').height(selHeight);
-        } else {
-            $('#list').height(selHelpHeight);
-        }
+//        var selHeight = $('#selector').height();
+//        var selHelpHeight = $('#selectorHelp').height();
+//        if (selHeight > selHelpHeight) {
+//            $('#list').height(selHeight);
+//        } else {
+//            $('#list').height(selHelpHeight);
+//        }
     };
     
     pushinfo = function(buttonId) {
@@ -291,22 +285,22 @@ $( function() {
         
         switch (buttonId) {
             case "advTPush":
-                lineinfo = "Set Temperature to " + document.getElementById('advTemp').value + "°C. <input type='button' id='delLi' value='Delete'/>";
+                lineinfo = "Set Temperature to " + document.getElementById('advTemp').value + "°C.<input type='button' class='delLi' value='Delete'/>";
                 break;
             case "advTHPush":
-                lineinfo = "Hold for " +document.getElementById('advTHold').value + "seconds. <input type='button' id='delLi' value='Delete'/>";
+                lineinfo = "Hold for " +document.getElementById('advTHold').value + " seconds.<input type='button' class='delLi' value='Delete'/>";
                 break;
             case "advMPush":
-                lineinfo = "Set Magnetic Field to " +document.getElementById('advMag').value + ". <input type='button' id='delLi' value='Delete'/>";
+                lineinfo = "Set Magnetic Field to " +document.getElementById('advMag').value + ".<input type='button' class='delLi' value='Delete'/>";
                 break;
             case "advMHPush":
-                lineinfo = "Hold for " +document.getElementById('advMHold').value + "seconds. <input type='button' id='delLi' value='Delete'/>";
+                lineinfo = "Hold for " +document.getElementById('advMHold').value + " seconds.<input type='button' class='delLi' value='Delete'/>";
                 break;
             case "advCPush":
-                lineinfo = "Run at configuration(s) " +document.getElementById('advConf').value + "<input type='button' id='delLi' value='Delete'/>";
+                lineinfo = "Run at configuration(s) " +document.getElementById('advConf').value + "<input type='button' class='delLi' value='Delete'/>";
                 break;
             case "advSPush":
-                lineinfo = "Measure sample(s) " +document.getElementById('advSamp').value + " <input type='button' id='delLi' value='Delete'/>";
+                lineinfo = "Measure sample(s) " +document.getElementById('advSamp').value + "<input type='button' class='delLi' value='Delete'/>";
                 break;
         }
         
@@ -315,12 +309,9 @@ $( function() {
         list.appendChild(newLi);
         newLi.innerHTML = lineinfo;
         
-//        $('#delLi').click(function(){
-//            console.log("1");
-//            var test = $(this).parent();
-//            console.log(test);
-//            $(this).parent().remove();
-//        });
+        $('.delLi').click(function(){
+            $(this).parent().remove();
+        });
     };
     
 });
