@@ -1,0 +1,8 @@
+runList
+
+	Table with
+	Position	Name	Configuration	Time	SE
+	
+	Make it printable
+	
+Ask Natasha, print trajectory history from que.

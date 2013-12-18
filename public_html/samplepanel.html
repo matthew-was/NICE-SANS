@@ -13,6 +13,10 @@
                 
                 window.onload = function() {
                     drawTable();
+                    var inputWidth = $('#sname').width() + $('#sdetail').width();
+                    $('#input').width(inputWidth);
+                    $('#runDiv').height($('#sname').height());
+                    $('#runList').height($('#sname').height()-60);
                 };
                 
                 reloadTable = function() {
@@ -22,12 +26,20 @@
                 $( "#detailButton" ).click(function(){
                     document.getElementById('sdetail').hidden=false;
                     document.getElementById('stimes').hidden=true;
+                    var inputWidth = $('#sname').width() + $('#sdetail').width();
+                    $('#input').width(inputWidth);
+                    $('#runDiv').height($('#sname').height());
+                    $('#runList').height($('#sname').height()-60);
                 });
 
                 $( "#timesButton" ).click(function(){
                     document.getElementById('sdetail').hidden=true;
                     document.getElementById('stimes').hidden=false;
-                });
+                    var inputWidth = $('#sname').width() + $('#stimes').width();
+                    $('#input').width(inputWidth);
+                    $('#runDiv').height($('#sname').height());
+                    $('#runList').height($('#sname').height()-60);
+               });
 
                 $( "#seButton" ).click(function(){
                     window.open("sepanel.html");
@@ -41,31 +53,50 @@
                     console.log("Write Trajectory");
                 });
                 
+                $( "#tempCheck").change(function(){
+                    document.getElementById('tempVal').disabled = !document.getElementById('tempCheck').checked;
+                    updateRunList();
+                });
+                
+                $( "#tempVal" ).change(function() {
+                    updateRunList();
+                });
+                                
             });
         </script>
         <style>
             #content { background-color: lightgray; overflow: auto;}
-            #head {position: relative; height: 50px; width: 100%}
+            #head {float: left; position: relative; height: 50px; width: 100%}
+            #headSE {float: left; margin-top: 10px; }
+            #tempVal {width:50px}
             #changer {position: relative; top: 10px; left: 10px; width:75px;}
-            #sname {position: relative; height: 360px; width: 160px}
+            #sname {position: relative; height: 360px; width: 160px; float: left;}
             #sampNames {text-align: center; border-collapse: collapse}
             #sampNames td {border: 1px solid black}
-            #sdetail {position: absolute; top:58px; left:164px;}
+            #input {float: left}
+            #sdetail {position: absolute; top:58px; left:162.5px;}
             #sampDetail {text-align: center; border-collapse: collapse}
             #sampDetail td {border: 1px solid black}
-            #stimes {position: absolute; top:58px; left:164px;}
-            #sampTimes {text-align: center; border-collapse: collapse}
+            #stimes {position: absolute; top:58px; left:162.5px;}
+            #runDiv {float: left; margin-left: 10px}
+            #runList {overflow: auto; width: 300px}
+            .conf {margin-left: 15px; margin-top: 0px; padding-top: 0;}
+            .samp {margin-left: 30px; margin-top: 0px; padding-top: 0;}
+            #runTime {height: 30px;}
+            #sampTimes {position: relative; text-align: center; border-collapse: collapse}
             #sampTimes td {border: 1px solid black}
+            #countTime {display: inline;}
             .sCol1 {width:16px; padding-left: 10px; padding-right: 10px}
             .sic2 {width: 100px; margin-left: 5px; margin-right: 5px; text-align: center}
             .dic3 {width: 40px; margin-left: 5px; margin-right: 5px; text-align: center}
             .dic4 {width: 50px; margin-left: 5px; margin-right: 5px; text-align: center}
             .dic5 {width: 150px; margin-left: 5px; margin-right: 5px; text-align: center}
             .dic6 {width: 40px; margin-left: 5px; margin-right: 5px; text-align: center}
-            #tbox {width:40px; text-align: center}
-            #row1 {height:30px;}
+            .tbox {width:40px; text-align: center}
+            #row1 {height:30px}
             .col3, .col4 {padding-left: 10px; padding-right: 10px;}
-            #buttons {position: relative; margin-top: 30px; margin-bottom: 20px}
+            .temp {margin: 0; padding: 0;}
+            #buttons {position: relative; margin-top: 30px; margin-bottom: 20px; clear: both}
         </style>
     </head>
     <body>
@@ -76,7 +107,13 @@
                     <option value="9P">9P</option>
                     <option value="7HB">7HB</option>
                 </select>
+                <p id="headSE">
+                    <input type="checkbox" id="tempCheck"/>
+                    Temperature to measure the samples: 
+                    <input type="number" id="tempVal" disabled="disabled" value="25"/>
+                </p>
             </div>
+            <div id="input">
             <div id="sname">
                 <table id="sampNames"></table>
             </div>
@@ -85,6 +122,11 @@
             </div>
             <div id="stimes" hidden="hidden">
                 <table id="sampTimes"></table>
+            </div>
+            </div>
+            <div id="runDiv">
+                <div id="runList"></div>
+                <div id="runTime">Total Count Time is <div id="countTime">0</div>&nbsp;seconds</div>
             </div>
             <div id="buttons">
                 <input type="button" id="detailButton" value="Show Details"/>
