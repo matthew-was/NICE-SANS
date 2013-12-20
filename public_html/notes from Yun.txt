@@ -1,7 +1,7 @@
 runList
 
 	Table with
-	Position	Name	Configuration	Time	SE
+	Position	Name	Configuration	Time	Sample Environment
 	
 	Make it printable
 	
