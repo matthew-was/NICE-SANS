@@ -1,0 +1,224 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $("#devices").accordion({
+                    animate: false,
+                    collapsible: true,
+                    active: false,
+                    heightStyle: "content"
+                });
+
+                $(".map").html("<ul><li>key</li><li>map</li><li>mapPut</li><li>mapRemove</li></ul>");
+                $(".noKeyMap").html("<ul><li>map</li><li>mapPut</li><li>mapRemove</li></ul>");
+                $(".motor").html("<ul><li>backgroundPollPeriod</li><li>backlash</li><li>broken</li><li>conversion</li><li>distanceToEngaged</li><li>driveCurrent</li><li>driveCurrentAutoMode</li><li>hardPosition</li><li>home</li><li>maxRetries</li><li>negLimitState</li><li>parity</li><li>posLimitState</li><li>rawLowerLimit</li><li>rawPosition</li><li>rawTolerance</li><li>rawUpperLimit</li><li>resetRawPosition</li><li>softLowerLimit</li><li>softPosition</li><li>softTolerance</li><li>softUpperLimit</li><li>state</li><li>zero</li></ul>");
+            });
+        </script>
+        <style>
+            .ui-helper-reset {font-size: 90%;}
+            .map
+            .noKeyMap
+            .motor
+        </style>
+    </head>
+    <body>
+        <div><p>Up to date 01/16/2014</p></div>
+        <div id="devices">
+            <h3>areaDetector</h3>
+            <div>
+                <ul>
+                    <li>active</li>
+                    <li>chooseROI</li>
+                    <li>counts</li>
+                    <li>dimension</li>
+                    <li>liveROI</li>
+                    <li>offset</li>
+                    <li>roiMask</li>
+                    <li>state</li>
+                    <li>strides</li>
+                </ul>
+            </div>
+            <h3>attenuator</h3>
+            <div><p class="map"></p></div>
+            <h3>attenuatorMotor</h3>
+            <div><p class="motor"></p></div>
+            <h3>beamStop</h3>
+            <div>
+                <ul>
+                    <li>beamCenterX</li>
+                    <li>beamCenterY</li>
+                    <li>beamStop</li>
+                </ul>
+            </div>
+            <h3>beamStop01</h3>
+            <div><p class="map"></p></div>
+            <h3>beamStop01Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>beamStop02</h3>
+            <div><p class="map"></p></div>
+            <h3>beamStop02Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>beamStop03</h3>
+            <div><p class="map"></p></div>
+            <h3>beamStop03Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>beamStop04</h3>
+            <div><p class="map"></p></div>
+            <h3>beamStop04Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>beamStopX</h3>
+            <div>
+                <ul>
+                    <li>X</li>
+                </ul>
+            </div>
+            <h3>beamStopY</h3>
+            <div><p class="motor"></p></div>
+            <h3>chamberElevator</h3>
+            <div><p class="motor"></p></div>
+            <h3>chamberRotation</h3>
+            <div><p class="motor"></p></div>
+            <h3>chamberSample</h3>
+            <div><p class="map"></p></div>
+            <h3>chamberTranslation</h3>
+            <div><p class="motor"></p></div>
+            <h3>configuration</h3>
+            <div><p class="map"></p></div>
+            <h3>counter</h3>
+            <div>
+                <ul>
+                    <li>arm</li>
+                    <li>backgroundPollPeriod</li>
+                    <li>broken</li>
+                    <li>clear</li>
+                    <li>countAgainst</li>
+                    <li>liveMonitor</li>
+                    <li>liveROI</li>
+                    <li>liveTime</li>
+                    <li>monitorPreset</li>
+                    <li>primaryNode</li>
+                    <li>roiPreset</li>
+                    <li>runningTrajectory</li>
+                    <li>startTime</li>
+                    <li>state</li>
+                    <li>stop</li>
+                    <li>stopTime</li>
+                    <li>timePreset</li>
+                </ul>
+            </div>
+            <h3>detectorOffset</h3>
+            <div><p class="motor"></p></div>
+            <h3>detectorPosition</h3>
+            <div><p class="motor"></p></div>
+            <h3>fastShutter</h3>
+            <div>
+                <ul>
+                    <li>broken</li>
+                    <li>openState</li>                    
+                </ul>
+            </div>
+            <h3>geometry</h3>
+            <div>
+                <ul>
+                    <li>rotation</li>
+                    <li>sampleAperture</li>
+                    <li>sampleApertureOffset</li>
+                    <li>samplePositionOffset</li>
+                    <li>sampleToDetectorDistance</li>
+                    <li>sourceApertureToSample</li>
+                    <li>sourceApertureToSampleAperture</li>
+                    <li>translation</li>
+                </ul>
+            </div>
+            <h3>guide</h3>
+            <div>
+                <ul>
+                    <li>aperture</li>
+                    <li>guide</li>
+                </ul>
+            </div>
+            <h3>guide01</h3>
+            <div><p class="map"></p></div>
+            <h3>guide01Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>guide02</h3>
+            <div><p class="map"></p></div>
+            <h3>guide02Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>guide03</h3>
+            <div><p class="map"></p></div>
+            <h3>guide03Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>guide04</h3>
+            <div><p class="map"></p></div>
+            <h3>guide04Motor</h3>
+            <div><p class="motor"></p></div>
+            <h3>huberRotation</h3>
+            <div><p class="motor"></p></div>
+            <h3>huberSample</h3>
+            <div><p class="map"></p></div>
+            <h3>huberTranslation</h3>
+            <div><p class="motor"></p></div>
+            <h3>rateMeter</h3>
+            <div>
+                <ul>
+                    <li>backgroundPollPeriod</li>
+                    <li>detectorRate</li>
+                    <li>monitorRate</li>
+                </ul>
+            </div>
+            <h3>sample</h3>
+            <div>
+                <ul>
+                    <li>description</li>
+                    <li>mass</li>
+                    <li>name</li>
+                    <li>thickness</li>
+                </ul>
+            </div>
+            <h3>sampleDescriptions</h3>
+            <div><p class="noKeyMap"></p></div>
+            <h3>sampleIndex</h3>
+            <div>
+                <ul>
+                    <li>index</li>
+                    <li>mode</li>
+                </ul>
+            </div>
+            <h3>sampleMasses</h3>
+            <div><p class="noKeyMap"></p></div>
+            <h3>sampleNames</h3>
+            <div><p class="noKeyMap"></p></div>
+            <h3>sampleThickness</h3>
+            <div><p class="noKeyMap"></p></div>
+            <h3>vSTiltMotor</h3>
+            <div><p class="motor"></p></div>
+            <h3>velocitySelectorMotor</h3>
+            <div><p class="motor"></p></div>
+            <h3>velocitySelectorTilt</h3>
+            <div><p class="map"></p></div>
+            <h3>wavelength</h3>
+            <div>
+                <ul>
+                    <li>wavelength</li>
+                </ul>
+            </div>
+            <h3>wavelengthSpread</h3>
+            <div>
+                <ul>
+                    <li>wavelengthSpread</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
