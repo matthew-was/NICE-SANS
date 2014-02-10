@@ -1,10 +1,11 @@
 
-$(function() {
+$(function () {
 
     drawTable = function() {
         var option = document.getElementById('changer');
         var optTxt = option.options[option.selectedIndex].text;
-
+        var i;
+        
         var numSamps;
         if (optTxt === "10CB") {
             numSamps = 10;
@@ -18,7 +19,7 @@ $(function() {
         var sNTable = document.getElementById('sampNames');
         var nRowNum = sNTable.rows.length;
         if (nRowNum !== 0) {
-            for (var i = 0; i < nRowNum; i++) {
+            for (i = 0; i < nRowNum; i++) {
                 sNTable.deleteRow();
             }
         }
@@ -26,7 +27,7 @@ $(function() {
         var sDTable = document.getElementById('sampDetail');
         var dRowNum = sDTable.rows.length;
         if (dRowNum !== 0) {
-            for (var i = 0; i < dRowNum; i++) {
+            for (i = 0; i < dRowNum; i++) {
                 sDTable.deleteRow();
             }
         }
@@ -34,7 +35,7 @@ $(function() {
         var sTTable = document.getElementById('sampTimes');
         var tRowNum = sTTable.rows.length;
         if (tRowNum !== 0) {
-            for (var i = 0; i < tRowNum; i++) {
+            for (i = 0; i < tRowNum; i++) {
                 sTTable.deleteRow();
             }
         }
@@ -55,7 +56,7 @@ $(function() {
         sTTable.insertRow(0).innerHTML = sTRow0;
         sTTable.insertRow(1).innerHTML = sTRow1;
 
-        for (var i = 0; i < numSamps; i++) {
+        for (i = 0; i < numSamps; i++) {
             var j = i + 1;
 
             var sNRowN = "<tr><td class='sCol1'>" + j + "</td><td class='sCol2'><input type=text class='sic2' onchange='getSamples()' /></td></tr>";
@@ -85,7 +86,7 @@ $(function() {
     getSamples = function() {
         var samCol = document.getElementsByClassName('sic2');
         var samNames = [];
-        for (var i = 0; i < samCol.length; i++) {
+        for (i = 0; i < samCol.length; i++) {
             samNames[i] = samCol[i].value;
         }
         localStorage.samNames = samNames;
@@ -98,7 +99,7 @@ $(function() {
         if (flet === "d") {
             var clssNme = "dic" + llet;
             var col = document.getElementsByClassName(clssNme);
-            for (var i = 0; i < col.length; i++) {
+            for (i = 0; i < col.length; i++) {
                 col[i].value = col[0].value;
             }
         } else if (flet === "f") {
@@ -135,11 +136,10 @@ $(function() {
 
     updateRunList = function() {
         var tempLine = "";
-        if (document.getElementById('tempCheck').checked === true) {
-            var temp = document.getElementById('tempVal').value;
-            tempLine = "<p class='temp'>At " + temp + "°C:</p>";
-        }
-        ;
+//        if (document.getElementById('tempCheck').checked === true) {
+//            var temp = document.getElementById('tempVal').value;
+//            tempLine = "<p class='temp'>At " + temp + "°C:</p>";
+//        }
 
         var configsNum = document.getElementById('sampTimes').rows[1].cells.length;
         var configs = [];
@@ -153,41 +153,46 @@ $(function() {
             samples[j] = document.getElementsByClassName('sic2')[j].value;
         }
 
-        var list = "";
+        var tempValue = "-";
         if (document.getElementById('tempCheck').checked === true) {
-            list = list + tempLine;
+            tempValue = document.getElementById('tempVal').value;
         }
 
         var confLine = "";
         var sampLine = "";
+        var list = "";
         var totTime = 0;
         var colTime = 0;
         var m = 0;
+        var n = 1;
         for (var k = 0; k < configs.length; k++) {
-            colTime = 0;
-            sampLine = "";
             for (var l = 0; l < samples.length; l++) {
                 var m = k + (l * 6);
                 var pointTime = document.getElementsByClassName('tbox')[m].value;
-                if (l === 0) {
-                    confLine = "<p class='conf'>At configuration " + configs[k] + ".<p>";
+                if (n === 1) {
+                    confLine = "<li class='no-sort'><table><tr><td class='lCol1'>#</td><td class='lCol2'>Name</td><td class='lCol3'>Config</td><td class='lCol4'>Time</td><td class='lCol5'>T</td></tr></table></li>";
                 }
                 if (parseFloat(pointTime) !== 0) {
-                    sampLine = sampLine + "<p class='samp'>Measure \"" + samples[l] + "\" for " + pointTime + " seconds.</p>";
+                    sampLine = sampLine + "<li class='drag'><table><tr><td class='lCol1'>"+n+"</td><td class='lCol2'>"+samples[l]+"</td><td class='lCol3'>"+configs[k]+"</td><td class='lCol4'>"+pointTime+"</td><td class='lCol5'>"+tempValue+"</td></tr><table></li>";
                     colTime = colTime + parseFloat(pointTime);
                     totTime = totTime + parseFloat(pointTime);
-
+                    n += 1;
                 }
-                if (l === samples.length - 1) {
-                    if (colTime > 0) {
-                        list = list + confLine + sampLine;
-                    }
+            }
+            if (k === configs.length - 1) {
+                if (colTime > 0) {
+                    list = list + confLine + sampLine;
                 }
             }
         }
 
         document.getElementById('countTime').innerHTML = totTime;
-        document.getElementById('runList').innerHTML = list;
+        document.getElementById('pList').innerHTML = list;
+        if (document.getElementById('pList').innerHTML !== "") {
+            document.getElementById('rList').innerHTML = confLine;
+        }
+        
+        makeDraggable();
 
     };
 
