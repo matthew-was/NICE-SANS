@@ -1,12 +1,11 @@
 
 $(function () {
 
-    drawTable = function() {
-        var option = document.getElementById('changer');
-        var optTxt = option.options[option.selectedIndex].text;
-        var i;
-        
-        var numSamps;
+    drawTable = function () {
+        var option = document.getElementById('changer'),
+            optTxt = option.options[option.selectedIndex].text,
+            i,
+            numSamps;
         if (optTxt === "10CB") {
             numSamps = 10;
         } else if (optTxt === "9P") {
@@ -14,28 +13,27 @@ $(function () {
         } else if (optTxt === "7HB") {
             numSamps = 7;
         }
-        ;
 
-        var sNTable = document.getElementById('sampNames');
-        var nRowNum = sNTable.rows.length;
+        var sNTable = document.getElementById('sampNames'),
+            nRowNum = sNTable.rows.length;
         if (nRowNum !== 0) {
-            for (i = 0; i < nRowNum; i++) {
+            for (i = 0; i < nRowNum; i += 1) {
                 sNTable.deleteRow();
             }
         }
 
-        var sDTable = document.getElementById('sampDetail');
-        var dRowNum = sDTable.rows.length;
+        var sDTable = document.getElementById('sampDetail'),
+            dRowNum = sDTable.rows.length;
         if (dRowNum !== 0) {
-            for (i = 0; i < dRowNum; i++) {
+            for (i = 0; i < dRowNum; i += 1) {
                 sDTable.deleteRow();
             }
         }
 
-        var sTTable = document.getElementById('sampTimes');
-        var tRowNum = sTTable.rows.length;
+        var sTTable = document.getElementById('sampTimes'),
+            tRowNum = sTTable.rows.length;
         if (tRowNum !== 0) {
-            for (i = 0; i < tRowNum; i++) {
+            for (i = 0; i < tRowNum; i += 1) {
                 sTTable.deleteRow();
             }
         }
@@ -43,12 +41,12 @@ $(function () {
         //name, description, thickness, mass
         // don't forget sample aperture.
 
-        var sNRow0 = "<tr><th colspan=2>Sample</th></tr>";
-        var sNRow1 = "<tr><td id='row1' class='col1'></td><td class='col2'>Name</td></tr>";
-        var sDRow0 = "<tr><th colspan=3>Details</th></tr>";
-        var sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col4'>Aperture (mm)</td><td class='col5'>Description</td></tr>";
-        var sTRow0 = "<tr><th colspan=6>Times</th></tr>";
-        var sTRow1 = "<tr><td id='row1'>1.1m5</td><td>1.1m5t</td><td>5m5</td><td>5m5t</td><td>5m14</td><td>5m14t</td></tr>";
+        var sNRow0 = "<tr><th colspan=2>Sample</th></tr>",
+            sNRow1 = "<tr><td id='row1' class='col1'></td><td class='col2'>Name</td></tr>",
+            sDRow0 = "<tr><th colspan=3>Details</th></tr>",
+            sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col4'>Aperture (mm)</td><td class='col5'>Description</td></tr>",
+            sTRow0 = "<tr><th colspan=6>Times</th></tr>",
+            sTRow1 = "<tr><td id='row1'>1.1m5</td><td>1.1m5t</td><td>5m5</td><td>5m5t</td><td>5m14</td><td>5m14t</td></tr>";
         sNTable.insertRow(0).innerHTML = sNRow0;
         sNTable.insertRow(1).innerHTML = sNRow1;
         sDTable.insertRow(0).innerHTML = sDRow0;
@@ -56,60 +54,61 @@ $(function () {
         sTTable.insertRow(0).innerHTML = sTRow0;
         sTTable.insertRow(1).innerHTML = sTRow1;
 
-        for (i = 0; i < numSamps; i++) {
-            var j = i + 1;
+        for (i = 0; i < numSamps; i += 1) {
+            var j = i + 1,
 
-            var sNRowN = "<tr><td class='sCol1'>" + j + "</td><td class='sCol2'><input type=text class='sic2' onchange='getSamples()' /></td></tr>";
-            var sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text class='dic4' value=12.7 /></td><td class='dCol5'><input type=text class='dic5'/></td></tr>";
-            var sTRowN = "<tr><td><input type=text class='tbox' class='tbox3' value=0 /></td><td><input type=text class='tbox' class='tbox4' value=0 /></td><td><input type=text class='tbox' class='tbox5' value=0 /></td><td><input type=text class='tbox' class='tbox6' value=0 /></td><td><input type=text class='tbox' class='tbox7' value=0 /></td><td><input type=text class='tbox' class='tbox8' value=0 /></td></tr>";
+                sNRowN = "<tr><td class='sCol1'>" + j + "</td><td class='sCol2'><input type=text class='sic2' onchange='getSamples()' /></td></tr>",
+                sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text class='dic4' value=12.7 /></td><td class='dCol5'><input type=text class='dic5'/></td></tr>",
+                sTRowN = "<tr><td><input type=text class='tbox' class='tbox3' value=0 /></td><td><input type=text class='tbox' class='tbox4' value=0 /></td><td><input type=text class='tbox' class='tbox5' value=0 /></td><td><input type=text class='tbox' class='tbox6' value=0 /></td><td><input type=text class='tbox' class='tbox7' value=0 /></td><td><input type=text class='tbox' class='tbox8' value=0 /></td></tr>";
             sNTable.insertRow(j + 1).innerHTML = sNRowN;
             sDTable.insertRow(j + 1).innerHTML = sDRowN;
             sTTable.insertRow(j + 1).innerHTML = sTRowN;
         }
 
-        var sdButtonRow = "<tr><td class='dbCol3'><input type=button class='dbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='dbCol4'><input type=button class='dbtn4' value='Fill' onclick=fillButton(this.className) /></td></tr>";
-        var stButtonRow1 = "<tr><td class='tbCol3'><input type=button id ='fbtn' class='fbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol4'><input type=button id ='fbtn' class='fbtn4' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol5'><input type=button id ='fbtn' class='fbtn5' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol6'><input type=button id ='fbtn' class='fbtn6' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol7'><input type=button id ='fbtn' class='fbtn7' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol8'><input type=button id ='fbtn' class='fbtn8' value='Fill' onclick=fillButton(this.className) /></td></tr>";
-        var stButtonRow2 = "<tr><td class='tbCol3'><input type=button class='hbtn3' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol4'><input type=button class='hbtn4' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol5'><input type=button class='hbtn5' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol6'><input type=button class='hbtn6' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol7'><input type=button class='hbtn7' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol8'><input type=button class='hbtn8' value='Hide' onclick=hideButton(this.className) /></td></tr>";
+        var sdButtonRow = "<tr><td class='dbCol3'><input type=button class='dbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='dbCol4'><input type=button class='dbtn4' value='Fill' onclick=fillButton(this.className) /></td></tr>",
+        stButtonRow1 = "<tr><td class='tbCol3'><input type=button id ='fbtn' class='fbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol4'><input type=button id ='fbtn' class='fbtn4' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol5'><input type=button id ='fbtn' class='fbtn5' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol6'><input type=button id ='fbtn' class='fbtn6' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol7'><input type=button id ='fbtn' class='fbtn7' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol8'><input type=button id ='fbtn' class='fbtn8' value='Fill' onclick=fillButton(this.className) /></td></tr>",
+        stButtonRow2 = "<tr><td class='tbCol3'><input type=button class='hbtn3' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol4'><input type=button class='hbtn4' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol5'><input type=button class='hbtn5' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol6'><input type=button class='hbtn6' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol7'><input type=button class='hbtn7' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol8'><input type=button class='hbtn8' value='Hide' onclick=hideButton(this.className) /></td></tr>";
         sDTable.insertRow(numSamps + 2).innerHTML = sdButtonRow;
         sTTable.insertRow(numSamps + 2).innerHTML = stButtonRow1;
         sTTable.insertRow(numSamps + 3).innerHTML = stButtonRow2;
 
-        $('.sic2').change(function() {
+        $('.sic2').change(function () {
             updateRunList();
         });
 
-        $('.tbox').change(function() {
+        $('.tbox').change(function () {
             updateRunList();
         });
     };
 
-    getSamples = function() {
+    getSamples = function () {
         var samCol = document.getElementsByClassName('sic2');
         var samNames = [];
-        for (i = 0; i < samCol.length; i++) {
+        var i;
+        for (i = 0; i < samCol.length; i += 1) {
             samNames[i] = samCol[i].value;
         }
         localStorage.samNames = samNames;
     };
 
-    fillButton = function(ref) {
+    fillButton = function (ref) {
         var flet = ref[0];
         var llet = ref[ref.length - 1];
 
         if (flet === "d") {
             var clssNme = "dic" + llet;
+            var i;
             var col = document.getElementsByClassName(clssNme);
-            for (i = 0; i < col.length; i++) {
+            for (i = 0; i < col.length; i += 1) {
                 col[i].value = col[0].value;
             }
         } else if (flet === "f") {
             var col = document.getElementsByClassName('tbox');
-            var sval = parseFloat(llet) - 3; 
+            var sval = parseFloat(llet) - 3;
             var i = sval;
-            for (i ; i < col.length; i+=6) {
+            for (i; i < col.length; i += 6) {
                 col[i].value = col[sval].value;
             }
-            ;
         }
     };
 
@@ -121,13 +120,13 @@ $(function () {
         var col = document.getElementsByClassName(clssNme);
 
         if (btn[0].value === "Hide") {
-            for (var i = 0; i < col.length; i++) {
+            for (var i = 0; i < col.length; i += 1) {
                 col[i].value = 0;
                 col[i].hidden = true;
             }
             btn[0].value = "Show";
         } else if (btn[0].value === "Show") {
-            for (var i = 0; i < col.length; i++) {
+            for (var i = 0; i < col.length; i += 1) {
                 col[i].hidden = false;
             }
             btn[0].value = "Hide";
@@ -135,21 +134,16 @@ $(function () {
     };
 
     updateRunList = function() {
-        var tempLine = "";
-//        if (document.getElementById('tempCheck').checked === true) {
-//            var temp = document.getElementById('tempVal').value;
-//            tempLine = "<p class='temp'>At " + temp + "°C:</p>";
-//        }
 
         var configsNum = document.getElementById('sampTimes').rows[1].cells.length;
         var configs = [];
-        for (var i = 0; i < configsNum; i++) {
+        for (var i = 0; i < configsNum; i += 1) {
             configs[i] = document.getElementById('sampTimes').rows[1].cells[i].innerHTML;
         }
 
         var sampNum = document.getElementsByClassName('sic2').length;
         var samples = [];
-        for (var j = 0; j < sampNum; j++) {
+        for (var j = 0; j < sampNum; j += 1) {
             samples[j] = document.getElementsByClassName('sic2')[j].value;
         }
 
@@ -158,42 +152,59 @@ $(function () {
             tempValue = document.getElementById('tempVal').value;
         }
 
-        var confLine = "";
+        var confLine = "<table><tr><td class='lCol1'>#</td><td class='lCol2'>Name</td><td class='lCol3'>Config</td><td class='lCol4'>Time</td><td class='lCol5'>T</td></tr></table>";
         var sampLine = "";
         var list = "";
         var totTime = 0;
         var colTime = 0;
         var m = 0;
         var n = 1;
-        for (var k = 0; k < configs.length; k++) {
-            for (var l = 0; l < samples.length; l++) {
+        var li;
+        var newli;
+        var pl = document.getElementById("pList");
+        var rl = document.getElementById("rList");
+        $("#pList").empty();
+        for (var k = 0; k < configs.length; k += 1) {
+            for (var l = 0; l < samples.length; l += 1) {
                 var m = k + (l * 6);
                 var pointTime = document.getElementsByClassName('tbox')[m].value;
-                if (n === 1) {
-                    confLine = "<li class='no-sort'><table><tr><td class='lCol1'>#</td><td class='lCol2'>Name</td><td class='lCol3'>Config</td><td class='lCol4'>Time</td><td class='lCol5'>T</td></tr></table></li>";
+                if (n === 1 && parseFloat(pointTime) !== 0) {
+                    newli="";
+                    newli = document.createElement("li");
+                    li = "";
+                    li = newli.innerHTML = confLine;
+                    pl.appendChild(newli);
+                }
+                if ($('#rList li').length === 0 && $('#pList li').length !== 0) {
+                    newli="";
+                    newli = document.createElement("li");
+                    li = "";
+                    li = newli.innerHTML = confLine;
+                    rl.appendChild(newli);
                 }
                 if (parseFloat(pointTime) !== 0) {
-                    sampLine = sampLine + "<li class='drag'><table><tr><td class='lCol1'>"+n+"</td><td class='lCol2'>"+samples[l]+"</td><td class='lCol3'>"+configs[k]+"</td><td class='lCol4'>"+pointTime+"</td><td class='lCol5'>"+tempValue+"</td></tr><table></li>";
+                    sampLine = "<table><tr><td class='lCol1'>"+n+"</td><td class='lCol2'>"+samples[l]+"</td><td class='lCol3'>"+configs[k]+"</td><td class='lCol4'>"+pointTime+"</td><td class='lCol5'>"+tempValue+"</td><td class='lCol6'><input type=button value='-' onclick=delrli(this)/></td></tr><table>";
+                    newli = "";
+                    newli = document.createElement("li");
+                    newli.setAttribute("class", "drag");
+                    li = "";
+                    li = newli.innerHTML = sampLine;
+                    pl.appendChild(newli);
                     colTime = colTime + parseFloat(pointTime);
                     totTime = totTime + parseFloat(pointTime);
-                    n += 1;
-                }
-            }
-            if (k === configs.length - 1) {
-                if (colTime > 0) {
-                    list = list + confLine + sampLine;
+                    n  += 1;
                 }
             }
         }
 
         document.getElementById('countTime').innerHTML = totTime;
-        document.getElementById('pList').innerHTML = list;
-        if (document.getElementById('pList').innerHTML !== "") {
-            document.getElementById('rList').innerHTML = confLine;
-        }
-        
+
         makeDraggable();
 
+    };
+    
+    function delrli(a) {
+        console.log(a);
     };
 
     updateSelectList = function() {
@@ -236,7 +247,7 @@ $(function () {
         var selRows = selTable.rows.length;
 
         if (selRows !== 0) {
-            for (var i = 0; i < selRows; i++) {
+            for (var i = 0; i < selRows; i += 1) {
                 selTable.deleteRow();
             }
         }

@@ -67,7 +67,7 @@
                 });
                 
                 makeDraggable = function() {
-                    $("#prepList li").draggable({
+                    $("#prepList .drag").draggable({
                         appendTo: "body",
                         helper: "clone"
                     });
@@ -133,6 +133,7 @@
             .lCol3 {width: 80px; text-align: center;}
             .lCol4 {width: 60px; text-align: center;}
             .lCol5 {width: 60px; text-align: center;}
+            #pList .lCol6 {display:none;}
             #buttons {position: relative; margin-top: 30px; margin-bottom: 20px; clear: both}
         </style>
     </head>
@@ -164,11 +165,7 @@
             <div id="runDiv">
                 <div id="sortLists">
                     <div id="prepList">
-                        <ul id='pList'>
-                            <li class="drag">Test 1</li>
-                            <li class="drag">Test 2</li>
-                            <li class="drag">Test 3</li>
-                        </ul>
+                        <ul id='pList'></ul>
                     </div>
                     <div id="runList">
                         <ul id='rList'></ul>
