@@ -71,24 +71,54 @@
                         appendTo: "body",
                         helper: "clone"
                     });
-                }
-
+                };
                 
-                $( "#runList ul" ).droppable({ 
+                $( "#runList ul" ).droppable({
                     activeClass: "ui-state-default", 
                     hoverClass: "ui-state-hover", 
                     accept: ":not(.ui-sortable-helper)", 
                     drop: function( event, ui ) { 
-                        $( "<li></li>" ).html( ui.draggable.html() ).appendTo( this ); 
+                        $( "<li></li>" ).html( ui.draggable.html() ).appendTo( this );
                     } 
                 }).sortable({ 
-                    items: "li:not(.placeholder)", 
+                    items: "li:not(.no-sort)", 
                     sort: function() { 
                         // gets added unintentionally by droppable interacting with sortable 
                         // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options 
                         $( this ).removeClass( "ui-state-default" ); 
                     } 
                 });
+                
+                delBtn = function(a) {
+                    a.parentNode.parentNode.parentNode.parentNode.remove();
+                    //console.log(test);
+                    //$('#rList').children().remove(test);
+                };
+                
+                $('#clearButton').click(function() {
+                    $('#rList').empty();
+                    updateRunList();
+                });
+                
+                $('#copyButton').click( function() {
+                    updateRunList();
+                    var numItems = $('#pList .drag').length;
+                    var rl = document.getElementById('rList');
+                    var i = 0;
+                    var items = $('#pList .drag');                    
+                    for (i = 0; i < items.length; i+=1 ) {
+                        items[i].removeAttribute("class");
+                        items[i].setAttribute("class", "drag");
+                        rl.appendChild(items[i]);
+                   };
+                    updateRunList();
+                    fixJquery();
+                 });
+                
+                fixJquery = function () {
+                    $('#rList .drag').draggable({disabled: true});
+                    $('#rList .drag').removeClass('ui-state-disabled')
+                };
                                 
             });
         </script>
@@ -108,9 +138,10 @@
             #stimes {position: absolute; top:58px; left:163.5px;}
             #runDiv {float:right; margin-left: 10px; width:750px;}
             #sortLists {float: left;}
-            #prepList {overflow: auto; width:350px; background-color: white; float: left;}
-            #runList {float: left; background-color: white; width: 350px; overflow:auto;}
-            #runTime {float:right; height: 30px; width: 100%;}
+            #prepList {overflow: auto; width:345px; background-color: white; float: left;}
+            #int {float:left; width:20px; background-color: lightgrey; height: 1px}
+            #runList {float: left; background-color: white; width: 380px; overflow:auto;}
+            #runTime {float:left; height: 30px; width: 100%;}
             #sampTimes {position: relative; text-align: center; border-collapse: collapse}
             #sampTimes td {border: 1px solid black}
             #countTime {display: inline;}
@@ -124,10 +155,10 @@
             #row1 {height:30px}
             .col3, .col4 {padding-left: 10px; padding-right: 10px;}
             .temp {margin: 0; padding: 0;}
-            #pList {list-style: none; margin-left: auto; margin-right: auto; margin-left: -30px}
-            #pList td {float: left; border-left: 1px solid black; border-right: 1px solid black; padding-top: 5px; padding-bottom: 5px;margin-left: -1px; background-color: lightgrey;}
-            #rList {list-style: none; margin-left: auto; margin-right: auto; margin-left: -30px}
-            #rList td {float: left; border-left: 1px solid black; border-right: 1px solid black; padding-top: 5px; padding-bottom: 5px;margin-left: -1px; background-color: lightgrey;}
+            #pList {list-style: none; margin-left: -30px}
+            #pList td {float: left; border-left: 1px solid black; border-right: 1px solid black; padding-top: 5px; padding-bottom: 5px;margin-left: -1px; background-color: lightgrey;height: 20px;}
+            #rList {list-style: none;margin-left: -35px;}
+            #rList td {float: left; border-left: 1px solid black; border-right: 1px solid black; padding-top: 5px; padding-bottom: 5px;margin-left: -1px; background-color: lightgrey; height: 20px;}
             .lCol1 {width:20px; text-align: center;}
             .lCol2 {width: 80px; text-align: center;}
             .lCol3 {width: 80px; text-align: center;}
@@ -167,6 +198,7 @@
                     <div id="prepList">
                         <ul id='pList'></ul>
                     </div>
+                    <div id="int"></div>
                     <div id="runList">
                         <ul id='rList'></ul>
                     </div>
@@ -176,9 +208,11 @@
             <div id="buttons">
                 <input type="button" id="detailButton" value="Show Details"/>
                 <input type="button" id="timesButton" value="Show Times"/>
-                <input type="button" id="seButton" value="Sample Environments"/>
+                <!--<input type="button" id="seButton" value="Sample Environments"/>
                 <input type="button" id="advancedButton" value="Advanced"/>
-                <input type="button" id="writeTrajButton" value="Write Trajectory"/>
+                <input type="button" id="writeTrajButton" value="Write Trajectory"/>-->
+                <input type="button" id="copyButton" value="Copy All"/>
+                <input type="button" id="clearButton" value="Clear Run List"/>
             </div>
         </div>
     </body>

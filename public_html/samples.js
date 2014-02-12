@@ -168,6 +168,10 @@ $(function () {
             for (var l = 0; l < samples.length; l += 1) {
                 var m = k + (l * 6);
                 var pointTime = document.getElementsByClassName('tbox')[m].value;
+                if(pointTime === "") {
+                    document.getElementsByClassName('tbox')[m].value = 0;               
+                    pointTime = document.getElementsByClassName('tbox')[m].value;
+                }
                 if (n === 1 && parseFloat(pointTime) !== 0) {
                     newli="";
                     newli = document.createElement("li");
@@ -180,10 +184,11 @@ $(function () {
                     newli = document.createElement("li");
                     li = "";
                     li = newli.innerHTML = confLine;
+                    newli.setAttribute("class", "no-sort");
                     rl.appendChild(newli);
                 }
                 if (parseFloat(pointTime) !== 0) {
-                    sampLine = "<table><tr><td class='lCol1'>"+n+"</td><td class='lCol2'>"+samples[l]+"</td><td class='lCol3'>"+configs[k]+"</td><td class='lCol4'>"+pointTime+"</td><td class='lCol5'>"+tempValue+"</td><td class='lCol6'><input type=button value='-' onclick=delrli(this)/></td></tr><table>";
+                    sampLine = "<table><tr><td class='lCol1'>"+n+"</td><td class='lCol2'>"+samples[l]+"</td><td class='lCol3'>"+configs[k]+"</td><td class='lCol4'>"+pointTime+"</td><td class='lCol5'>"+tempValue+"</td><td class='lCol6'><input onclick=delBtn(this) type=button value='-'/></td></tr><table>";
                     newli = "";
                     newli = document.createElement("li");
                     newli.setAttribute("class", "drag");
@@ -203,10 +208,6 @@ $(function () {
 
     };
     
-    function delrli(a) {
-        console.log(a);
-    };
-
     updateSelectList = function() {
         var index = document.getElementById('choice').selectedIndex;
         var selected;
