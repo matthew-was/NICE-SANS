@@ -44,7 +44,7 @@ $(function () {
         var sNRow0 = "<tr><th colspan=2>Sample</th></tr>",
             sNRow1 = "<tr><td id='row1' class='col1'></td><td class='col2'>Name</td></tr>",
             sDRow0 = "<tr><th colspan=3>Details</th></tr>",
-            sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col4'>Aperture (mm)</td><td class='col5'>Description</td></tr>",
+            sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col4'>Mass (g)</td><td class='col5'>Description</td></tr>",
             sTRow0 = "<tr><th colspan=6>Times</th></tr>",
             sTRow1 = "<tr><td id='row1'>1.1m5</td><td>1.1m5t</td><td>5m5</td><td>5m5t</td><td>5m14</td><td>5m14t</td></tr>";
         sNTable.insertRow(0).innerHTML = sNRow0;
@@ -58,19 +58,19 @@ $(function () {
             var j = i + 1,
 
                 sNRowN = "<tr><td class='sCol1'>" + j + "</td><td class='sCol2'><input type=text class='sic2' onchange='getSamples()' /></td></tr>",
-                sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text class='dic4' value=12.7 /></td><td class='dCol5'><input type=text class='dic5'/></td></tr>",
-                sTRowN = "<tr><td><input type=text class='tbox' class='tbox3' value=0 /></td><td><input type=text class='tbox' class='tbox4' value=0 /></td><td><input type=text class='tbox' class='tbox5' value=0 /></td><td><input type=text class='tbox' class='tbox6' value=0 /></td><td><input type=text class='tbox' class='tbox7' value=0 /></td><td><input type=text class='tbox' class='tbox8' value=0 /></td></tr>";
+                sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text class='dic4'/></td><td class='dCol5'><input type=text class='dic5'/></td></tr>",
+                sTRowN = "<tr><td class='tcol3'><input type=text class='tbox' class='tbox3' value=0 /></td><td class='tcol4'><input type=checkbox class='cbox' class='tbox4'/></td><td class='tcol5'><input type=text class='tbox' class='tbox5' value=0 /></td><td class='tcol6'><input type=checkbox class='cbox' class='tbox6'/></td><td class='tcol7'><input type=text class='tbox' class='tbox7' value=0 /></td><td class='tcol8'><input type=checkbox class='cbox' class='tbox8'/></td></tr>";
             sNTable.insertRow(j + 1).innerHTML = sNRowN;
             sDTable.insertRow(j + 1).innerHTML = sDRowN;
             sTTable.insertRow(j + 1).innerHTML = sTRowN;
         }
 
-        var sdButtonRow = "<tr><td class='dbCol3'><input type=button class='dbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='dbCol4'><input type=button class='dbtn4' value='Fill' onclick=fillButton(this.className) /></td></tr>",
-        stButtonRow1 = "<tr><td class='tbCol3'><input type=button id ='fbtn' class='fbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol4'><input type=button id ='fbtn' class='fbtn4' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol5'><input type=button id ='fbtn' class='fbtn5' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol6'><input type=button id ='fbtn' class='fbtn6' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol7'><input type=button id ='fbtn' class='fbtn7' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol8'><input type=button id ='fbtn' class='fbtn8' value='Fill' onclick=fillButton(this.className) /></td></tr>",
-        stButtonRow2 = "<tr><td class='tbCol3'><input type=button class='hbtn3' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol4'><input type=button class='hbtn4' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol5'><input type=button class='hbtn5' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol6'><input type=button class='hbtn6' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol7'><input type=button class='hbtn7' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol8'><input type=button class='hbtn8' value='Hide' onclick=hideButton(this.className) /></td></tr>";
+        var sdButtonRow = "<tr><td class='dbCol3'><input type=button class='dbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='dbCol4'><input type=button class='dbtn4' value='Fill' onclick=fillButton(this.className) /></td></tr>"
+//        var stButtonRow1 = "<tr><td class='tbCol3'><input type=button id ='fbtn' class='fbtn3' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol4'><input type=button id ='fbtn' class='fbtn4' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol5'><input type=button id ='fbtn' class='fbtn5' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol6'><input type=button id ='fbtn' class='fbtn6' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol7'><input type=button id ='fbtn' class='fbtn7' value='Fill' onclick=fillButton(this.className) /></td><td class='tbCol8'><input type=button id ='fbtn' class='fbtn8' value='Fill' onclick=fillButton(this.className) /></td></tr>"
+        var stButtonRow2 = "<tr><td class='tbCol3'><input type=button class='hbtn3' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol4'><input type=button class='hbtn4' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol5'><input type=button class='hbtn5' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol6'><input type=button class='hbtn6' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol7'><input type=button class='hbtn7' value='Hide' onclick=hideButton(this.className) /></td><td class='tbCol8'><input type=button class='hbtn8' value='Hide' onclick=hideButton(this.className) /></td></tr>";
         sDTable.insertRow(numSamps + 2).innerHTML = sdButtonRow;
-        sTTable.insertRow(numSamps + 2).innerHTML = stButtonRow1;
-        sTTable.insertRow(numSamps + 3).innerHTML = stButtonRow2;
+        //sTTable.insertRow(numSamps + 2).innerHTML = stButtonRow1;
+        sTTable.insertRow(numSamps + 2).innerHTML = stButtonRow2;
 
         $('.sic2').change(function () {
             updateRunList();
@@ -116,18 +116,27 @@ $(function () {
     hideButton = function(ref) {
         var llet = ref[ref.length - 1];
         var btn = document.getElementsByClassName(ref);
-        var clssNme = "tbox" + llet;
+        var clssNme = "tcol" + llet;
         var col = document.getElementsByClassName(clssNme);
-
+        
         if (btn[0].value === "Hide") {
             for (var i = 0; i < col.length; i += 1) {
-                col[i].value = 0;
-                col[i].hidden = true;
+                if(col[i].firstChild.type === "text") {
+                    col[i].firstChild.value = 0;
+                    col[i].firstChild.hidden = true;
+                } else if (col[i].firstChild.type === "checkbox") {
+                    col[i].firstChild.checked = false;
+                    col[i].firstChild.hidden = true;
+                }
             }
             btn[0].value = "Show";
         } else if (btn[0].value === "Show") {
             for (var i = 0; i < col.length; i += 1) {
-                col[i].hidden = false;
+                if(col[i].firstChild.type === "text") {
+                    col[i].firstChild.hidden = false;
+                } else if (col[i].firstChild.type === "checkbox") {
+                    col[i].firstChild.hidden = false;
+                }
             }
             btn[0].value = "Hide";
         }
