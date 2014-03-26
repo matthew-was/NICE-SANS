@@ -13,7 +13,7 @@ $(function() {
                 table.deleteRow();
             }
         }
-        var head = "<tr><td>Name</td><td>Wavelength</td><td>Wavelength Spread</td><td>Attenuator</td><td>Guides</td><td>Guide Aperture</td><td>Beam Stop</td><td>Beam Stop X Position</td><td>Beam Stop Y Position</td><td>Beam Center X Position</td><td>Beam Center Y Position</td><td>Detector Distance</td><td>Detector Offset</td></tr>";
+        var head = "<tr><td>Name</td><td>Wavelength</td><td>Wavelength Spread</td><td>Attenuator</td><td>Guides</td><td>Guide Aperture</td><td>Sample Aperture</td><td>Beam Stop</td><td>Beam Stop X Position</td><td>Beam Stop Y Position</td><td>Beam Center X Position</td><td>Beam Center Y Position</td><td>Detector Distance</td><td>Detector Offset</td><td>Sample Position</td><td>Time</td></tr>";
         table.insertRow(0).innerHTML = head;
         for (var j=0; j<configuration.length; j++) {
             table.insertRow(j+1).innerHTML = setTable(configuration[j], j+1);
@@ -118,7 +118,7 @@ $(function() {
                 guideAp = "<td><select onchange=makeObject()><option selected='selected' value='50.0'>50.0mm</option></select></td>";
                 break
         }
-        
+        var sampAp = "<td><input type='number' step=0.1 class='input' value =" + object.sampleAperture  +"/></td>"
         var bStop = "<td><select onchange=makeObject()><option value=1 selected='selected'>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option></select></td>";
         var bStopX = "<td><input type='number' step=0.01 class='input' onchange=makeObject() onchange=redrawTable() value=" + object.beamStopX + " /></td>";
         var bStopY = "<td><input type='number' step=0.01 class='input' onchange=makeObject() onchange=redrawTable() value=" + object.beamStopY + " /></td>";
@@ -141,18 +141,24 @@ $(function() {
         if (object.detectorOffset > detOffMax) {
             object.detectorOffset = detOffMax;
         }        
-        var detOff = "<td><input type='text' class='input' onchange=makeObject() value=" + object.detectorOffset + " /></td></tr>";
+        var detOff = "<td><input type='text' class='input' onchange=makeObject() value=" + object.detectorOffset + " /></td>";
         
-        var align = "<input type='button' id='alignbtn' onclick=alignRow("+rnum+") value='Align' />";
+        var sampPos = "<td><input type='number' class='input' value='1'/></td>"
+        
+        var time = "<td><input type='number' class='input' value='180'/></td>"
+        
+        var run = "<input type='button' id='runbtn' value='Run' />";
+
+        var copy = "<input type='button' id='copybtn' value='Copy' />";
         
         var rowNum = configurations.length;
         if (rowNum < 2) {
             var del = "";
         } else {
-            var del = "<input type='button' id='delbtn' onclick=deleteRow("+rnum+") value='Delete'/>";
+            var del = "<input type='button' id='delbtn' onclick=deleteRow("+rnum+") value='Remove'/>";
         }
         
-        return start+name+wl+wlS+att+guide+guideAp+bStop+bStopX+bStopY+bCentX+bCentY+detPos+detOff+end+align+del;
+        return start+name+wl+wlS+att+guide+guideAp+sampAp+bStop+bStopX+bStopY+bCentX+bCentY+detPos+detOff+sampPos+time+end+run+copy+del;
     };
     
     makeObject = function() {
