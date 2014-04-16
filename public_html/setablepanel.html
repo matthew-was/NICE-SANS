@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sample Panel</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src=setable.js></script>
+        <script>
+            $(function() {
+                window.onload = function() {
+                    drawTable();
+                };
+                
+                $("#add").click(function(){
+                    addLine();
+                });
+                
+                $("#del").click(function(){
+                    delLine();
+                });
+                
+            });
+        </script>
+        <style>
+            #sample {background-color: lightgrey;width: auto; height: auto;}
+            .dColT, .dColN, .dColM, .dColD {width: auto; text-align: center}
+            .iColN {width: 100px; text-align: center;}
+            .iColT {width: 30px; text-align: center;}
+            .iColM {width: 30px; text-align: center;}
+            .iColD {width: 200px; text-align: center;}
+            #body {padding-top: 20px; padding-bottom: 20px; background-color: lightgrey;}
+            #numTable, #tempTable, #magTable {vertical-align: top; padding-top: 8px}
+            #stimes {vertical-align: top}
+            #sampleTable td {border: 1px black solid}
+            #sampleTable {border-collapse: collapse}
+            #sampNum {text-align: center; border-collapse: collapse; margin-right: -4px; height: 25px; width: 50px;}
+            #sampNum td {border: 1px solid black; ; height: 25px}
+            #sampTemp {text-align: center; border-collapse: collapse; margin-right: -4px; height: 25px; width: 150px}
+            #sampTemp td {border: 1px solid black; height: 25px}
+            #sampMag {text-align: center; border-collapse: collapse; margin-right: -4px; height: 25px; width: 150px}
+            #sampMag td {border: 1px solid black; height: 25px}
+            #sampTimes {text-align: center; border-collapse: collapse;}
+            #sampTimes td {text-align: center; border: 1px solid black; height: 25px; width: 60px}
+            #numTable, #tempTable, #magTable, #stimes {display: inline-block;}
+            .tbox {text-align: center}
+            .tbox1, .tbox2 {width: 50px;}
+            .tbox3, .tbox5, .tbox7 {width: 40px;}
+            #foot {background-color: lightgrey; padding: 10px;}
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <div id="head">
+                <div id="sample">
+                    <table id="sampleTable">
+                        <tr><th colspan=4>Sample</th></tr>
+                        <tr><td class="dColN" >Name</td><td class="dColT" >Thickness (mm)</td><td class="dColM" >Mass (g)</td><td class="dColD" >Description</td></tr>
+                        <tr><td class="dColN"><input class="iColN" type=text/></td><td class="dColT" ><input class="iColT" type=text value=1 /></td><td class="dColM"><input class="iColM" type=text/ value="0.4"></td><td class="dColD"><input class="iColD" type=text /></td></tr>
+                    </table>
+                </div>
+            </div>
+            <div id="body">
+                <div id="tables">
+                    <div id="numTable">
+                        <table id="sampNum"></table>
+                    </div>
+                    <div id="tempTable">
+                        <table id="sampTemp"></table>
+                    </div>
+                    <div id="magTable">
+                        <table id="sampMag"></table>
+                    </div>
+                    <div id="stimes">
+                        <table id="sampTimes"></table>
+                    </div>
+                </div>
+            </div>
+            <div id="foot">
+                <input type="button" id="add" value="Add Line">
+                <input type="button" id="del" value="Remove Line">
+            </div>
+        </div>
+    </body>
+</html>

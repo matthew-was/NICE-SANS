@@ -8,7 +8,7 @@
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src=samples.js></script>
         <script>
-            $(function() {
+            $(function() { 
                 localStorage.samNames = [];
                 
                 window.onload = function() {
@@ -46,7 +46,7 @@
                });
 
                 $( "#seButton" ).click(function(){
-                    window.open("sepanel.html");
+                    window.open("sepanel.html");safari
                 });
 
                 $( "#advancedButton" ).click(function(){
@@ -183,17 +183,17 @@
                 </p>
             </div>
             <div id="input">
-            <div id="sname">
-                <table id="sampNames"></table>
+                <div id="sname">
+                    <table id="sampNames"></table>
+                </div>
+                <div id="sdetail">
+                    <table id="sampDetail"></table>
+                </div>
+                <div id="stimes" hidden="hidden">
+                    <table id="sampTimes"></table>
+                </div>
             </div>
-            <div id="sdetail">
-                <table id="sampDetail"></table>
-            </div>
-            <div id="stimes" hidden="hidden">
-                <table id="sampTimes"></table>
-            </div>
-            </div>
-            <div id="runDiv">
+            <!--<div id="runDiv">
                 <div id="sortLists">
                     <div id="prepList">
                         <ul id='pList'></ul>
@@ -204,7 +204,7 @@
                     </div>
                 </div>
                 <div id="runTime">Total Count Time is <div id="countTime">0</div>&nbsp;seconds</div>
-            </div>
+            </div>-->
             <div id="buttons">
                 <input type="button" id="detailButton" value="Show Details"/>
                 <input type="button" id="timesButton" value="Show Times"/>
