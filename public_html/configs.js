@@ -147,9 +147,9 @@ $(function() {
         
         var time = "<td><input type='number' class='input' value='180'/></td>"
         
-        var run = "<input type='button' id='runbtn' value='Run' />";
+        var run = "<input type='button' id='runbtn' value='Run' onclick=runButton() />";
 
-        var copy = "<input type='button' id='copybtn' value='Copy' />";
+        var copy = "<input type='button' id='copybtn' value='Copy' onclick=copyButton("+rnum+") />";
         
         var rowNum = configurations.length;
         if (rowNum < 2) {
@@ -198,42 +198,34 @@ $(function() {
         redrawTable();
     };
     
-    alignRow = function(n) {
-        localStorage.numb = n;
-        localStorage.setItem('configurations', JSON.stringify(configurations));
-        window.open("alignpanel.html");
+    runButton = function() {
+        console.log("Run the selected alignment measurement");
     };
-    
-    alignTable = function(config) {
-        var table=document.getElementById('alignTable');
-        var tabRow0 = "<tr><td>Beam Stop X</td><td>Beam Stop Y</td></tr>";
-        var tabRow1 = "";
-        if (config.beamStopX < -10) {
-            tabRow1 = "<tr><td><input type='text' onchange=getAlign() disabled=true value="+config.beamStopX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamStopY+" /></td></tr>";
-        } else {
-            tabRow1 = "<tr><td><input type='text' onchange=getAlign() value="+config.beamStopX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamStopY+" /></td></tr>";
+
+    copyButton = function (n) {
+        configurations = makeObject();
+        var m = n-1,
+            config = configurations[m],
+            tempconfigs = [];
+        
+        for (var i = 0; i < configurations.length; i += 1) {
+            tempconfigs.push(configurations[i]);
         }
-        var tabRow2 = "<tr><td>Beam Center X</td><td>Beam Center Y</td></tr>";
-        var tabRow3 = "<tr><td><input type='text' onchange=getAlign() value="+config.beamCenterX+" /></td><td><input type='text' onchange=getAlign() value="+config.beamCenterY+" /></td></tr>";
-        var tabRow4 = "<tr><td>Sample Position</td><td>Time</td></tr>";
-        var tabRow5 = "<tr><td><input type='text' onchange=getAlign() value = 0 /></td><td><input type='text' onchange=getAlign() value = 180 /></tr>";
-        table.insertRow(0).innerHTML = tabRow0;
-        table.insertRow(1).innerHTML = tabRow1;
-        table.insertRow(2).innerHTML = tabRow2;
-        table.insertRow(3).innerHTML = tabRow3;
-        table.insertRow(4).innerHTML = tabRow4;
-        table.insertRow(5).innerHTML = tabRow5;
-    };
-    
-    getAlign = function() {
-        var newTable= document.getElementById('alignTable');
-        var newconfig = JSON.parse(localStorage.configurations);
-        var n = localStorage.numb - 1;
-        newconfig[n].beamStopX = parseInt(newTable.rows[1].cells[0].firstChild.value);
-        newconfig[n].beamStopY = parseInt(newTable.rows[1].cells[1].firstChild.value);
-        newconfig[n].beamCenterX = parseInt(newTable.rows[3].cells[0].firstChild.value);
-        newconfig[n].beamCenterY = parseInt(newTable.rows[3].cells[1].firstChild.value);
-        localStorage.setItem('configurations', JSON.stringify(newconfig));
+        
+        configurations = [];
+        for (var j = 0; j <= tempconfigs.length; j += 1 ) {
+            if (j < n) {
+                configurations.push(tempconfigs[j]);
+            } else if(j == n) {
+                configurations.push(config);
+            } else {
+                configurations.push(tempconfigs[j-1]);
+            }
+        }
+        
+        localStorage.setItem('configurations', JSON.stringify(configurations));
+        drawTable(configurations);
+
     };
         
 });$;

@@ -39,37 +39,18 @@ and open the template in the editor.
                     drawTable(configurations);
                 };
                
-                $( "#addButton" ).click(function() {
-                    configurations = makeObject();
-                    var config = {
-                        name: "1m5",
-                        wavelength:5,
-                        wavelengthSpread:0.132,
-                        attenuator:0,
-                        guides:0,
-                        guideAperture:14.3,
-                        sampleAperture:12.7,
-                        beamStop:1,
-                        beamStopX:0,
-                        beamStopY:0,
-                        beamCenterX:64,
-                        beamCenterY:64,
-                        detectorPosition:110,
-                        detectorOffset:0
-                    };
-                    configurations.push(config);
-                    localStorage.setItem('configurations', JSON.stringify(configurations));
-                    drawTable(configurations);
-                });
-                
                 $( "#loadButton" ).click(function() {
                     console.log("Load Configuration File");
                 });
                                
                 $( "#saveButton" ).click(function() {
-                    console.log("Save Configuration File");
+                    console.log("Save Configuration File and update the server");
                 });
                                
+                $( "#updateButton" ).click(function() {
+                    console.log("Update the server");
+                });
+
             });
         </script>
         <style>

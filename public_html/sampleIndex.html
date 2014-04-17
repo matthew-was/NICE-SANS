@@ -1,0 +1,64 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sample Index Definer</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src=configs.js></script>
+        <script>
+            $(function() {
+                window.onload = function() {
+                    var tcheck = document.getElementById('transcheck'),
+                        rcheck = document.getElementById('rotcheck'),
+                        echeck = document.getElementById('elevcheck'),
+                        count = document.getElementById('positions').rows.length,
+                        tbox = document.getElementsByClassName('transtext'),
+                        rbox = document.getElementsByClassName('rottext'),
+                        ebox = document.getElementsByClassName('elevtext');
+                    
+                    for (var i = 0; i < count; i += 1) {
+                        tbox[i].disabled = !tcheck.checked;
+                        rbox[i].disabled = !rcheck.checked;
+                        ebox[i].disabled = !echeck.checked;
+                    }
+                    
+                    
+                }
+            });
+        </script>
+        <style>
+            #header, #middle, #footer {padding: 10px;}
+            #positions, #checks {border-collapse: collapse}
+            #checks td {width:150px; text-align: center}
+            #positions td {width: 150px; border: black 1px solid; text-align: center;}
+            .transtext, .rottext, .elevtext {width: 70px}
+            #checks .first, #positions .first {width: 50px}
+        </style>
+    </head>
+    <body>
+        <div id=header>
+            Deine Sample Index based on:
+            <br><br>
+            <table id=checks>
+                <tr><td class="first"></td><td><input type="checkbox" id=transcheck checked=true> Translation</td>
+                <td><input type="checkbox" id=rotcheck> Rotation</td>
+                <td><input type="checkbox" id=elevcheck> Elevation</td></tr>
+            </table>
+        </div>
+        <div id=middle>
+            <table id=positions>
+                <tr><td class=first>1</td><td><input type=text class=transtext></td><td><input type=text class=rottext></td><td><input type=text class=elevtext></td></tr>
+            </table>
+        </div>
+        <div id=footer>
+            <input type="button" id=addbtn value="Add Row">
+            <input type="button" id=delBtn value="Delete Row">
+        </div>
+    </body>
+</html>
