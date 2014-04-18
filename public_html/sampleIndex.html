@@ -14,6 +14,44 @@ and open the template in the editor.
         <script>
             $(function() {
                 window.onload = function() {
+                    checkBoxes();
+                    enableDel();
+                }
+                
+                $('#transcheck').change( function() {
+                    var tcheck = document.getElementById('transcheck'),
+                        rcheck = document.getElementById('rotcheck'),
+                        echeck = document.getElementById('elevcheck');
+                    
+                    if (rcheck.checked == false && echeck.checked == false) {
+                        tcheck.checked = true;
+                    };
+                    checkBoxes();
+                });
+
+                $('#rotcheck').change( function() {
+                    var tcheck = document.getElementById('transcheck'),
+                        rcheck = document.getElementById('rotcheck'),
+                        echeck = document.getElementById('elevcheck');
+                    
+                    if (tcheck.checked == false && echeck.checked == false) {
+                        rcheck.checked = true;
+                    };
+                    checkBoxes();
+                });
+                
+                $('#elevcheck').change( function() {
+                    var tcheck = document.getElementById('transcheck'),
+                        rcheck = document.getElementById('rotcheck'),
+                        echeck = document.getElementById('elevcheck');
+                    
+                    if (tcheck.checked == false && rcheck.checked == false) {
+                        echeck.checked = true;
+                    };
+                    checkBoxes();
+                });
+                
+                checkBoxes = function() {
                     var tcheck = document.getElementById('transcheck'),
                         rcheck = document.getElementById('rotcheck'),
                         echeck = document.getElementById('elevcheck'),
@@ -27,9 +65,42 @@ and open the template in the editor.
                         rbox[i].disabled = !rcheck.checked;
                         ebox[i].disabled = !echeck.checked;
                     }
+
+                };
+                
+                $('#addBtn').click( function() {
+                    var ptable = document.getElementById('positions'),
+                        count = ptable.rows.length,
+                        count2 = count + 1,
+                        row = "<tr><td class=first>"+count2+"</td><td><input type=text class=transtext></td><td><input type=text class=rottext></td><td><input type=text class=elevtext></td></tr>";
                     
+                    ptable.insertRow(count).innerHTML = row;
                     
-                }
+                    enableDel();
+                    checkBoxes();
+                });
+
+                $('#delBtn').click( function() {
+                    var ptable = document.getElementById('positions'),
+                        count = ptable.rows.length - 1;
+                    
+                    ptable.deleteRow(count);
+                    
+                    enableDel();
+                    checkBoxes()
+                
+                });
+
+                enableDel =  function() {
+                    var ptable = document.getElementById('positions'),
+                        count = ptable.rows.length;
+                    
+                    if (count < 2) {
+                        document.getElementById('delBtn').disabled = true;
+                    } else {
+                        document.getElementById('delBtn').disabled = false;
+                    }
+                };
             });
         </script>
         <style>
@@ -43,7 +114,7 @@ and open the template in the editor.
     </head>
     <body>
         <div id=header>
-            Deine Sample Index based on:
+            Define Sample Index based on:
             <br><br>
             <table id=checks>
                 <tr><td class="first"></td><td><input type="checkbox" id=transcheck checked=true> Translation</td>
@@ -57,7 +128,7 @@ and open the template in the editor.
             </table>
         </div>
         <div id=footer>
-            <input type="button" id=addbtn value="Add Row">
+            <input type="button" id=addBtn value="Add Row">
             <input type="button" id=delBtn value="Delete Row">
         </div>
     </body>
