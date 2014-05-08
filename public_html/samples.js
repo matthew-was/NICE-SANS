@@ -39,9 +39,9 @@ $(function () {
         }
 
         var sNRow0 = "<tr><th colspan=2>Sample</th></tr>",
-            sNRow1 = "<tr><td id='row1' class='col1'></td><td class='col2'>Name</td></tr>",
-            sDRow0 = "<tr><th colspan=3>Details</th></tr>",
-            sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col4'>Mass (g)</td><td class='col5'>Description</td></tr>",
+            sNRow1 = "<tr><td id='row1' class='col1'></td><td class='col2'>Description</td></tr>",
+            sDRow0 = "<tr><th colspan=2>Details</th></tr>",
+            sDRow1 = "<tr><td id='row1' class='col3' >Thickness (mm)</td><td class='col5'>File Name</td></tr>",
             sTRow0 = "<tr><th colspan=6>Times</th></tr>",
             sTRow1 = "<tr><td id='row1'>1.1m5</td><td>1.1m5t</td><td>5m5</td><td>5m5t</td><td>5m14</td><td>5m14t</td></tr>";
         sNTable.insertRow(0).innerHTML = sNRow0;
@@ -55,7 +55,7 @@ $(function () {
             var j = i + 1,
 
                 sNRowN = "<tr><td class='sCol1'>" + j + "</td><td class='sCol2'><input type=text class='sic2' /></td></tr>",
-                sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td><td class='dCol4'><input type=text value=0.4 class='dic4'/></td><td class='dCol5'><input type=text class='dic5'/></td></tr>",
+                sDRowN = "<tr><td class='dCol3'><input type=text class='dic3' value=1 /></td></td><td class='dCol5'><input type=text class='dic5'/></td></tr>",
                 sTRowN = "<tr><td class='tcol3'><input type=text class='tbox tbox3' value=0 /></td><td class='tcol4'><input type=checkbox class='cbox tbox4'/></td><td class='tcol5'><input type=text class='tbox tbox5' value=0 /></td><td class='tcol6'><input type=checkbox class='cbox tbox6'/></td><td class='tcol7'><input type=text class='tbox tbox7' value=0 /></td><td class='tcol8'><input type=checkbox class='cbox tbox8'/></td></tr>";
             sNTable.insertRow(j + 1).innerHTML = sNRowN;
             sDTable.insertRow(j + 1).innerHTML = sDRowN;

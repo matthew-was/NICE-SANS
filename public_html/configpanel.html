@@ -8,14 +8,13 @@ and open the template in the editor.
         <title>Configuration Panel</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src=configs.js></script>
         <script>
             $(function() {
                 configurations = [];
                 localStorage.setItem('configurations', JSON.stringify(configurations));
-                
                 window.onload = function() {
                     configurations = [];
                     var config = {
@@ -38,15 +37,13 @@ and open the template in the editor.
                     localStorage.setItem('configurations', JSON.stringify(configurations));
                     drawTable(configurations);
                 };
-               
                 $( "#loadButton" ).click(function() {
                     console.log("Load Configuration File");
                 });
-                               
                 $( "#saveButton" ).click(function() {
                     console.log("Save Configuration File and update the server");
                 });
-                               
+
                 $( "#updateButton" ).click(function() {
                     console.log("Update the server");
                 });
@@ -56,14 +53,11 @@ and open the template in the editor.
         <style>
             #content {position: relative; height:500px; background-color: lightgray; overflow:auto}
             #configs {position: relative; margin-top: 30px;}
-            
             #config_table {table-layout:fixed; width: 200px;  border-collapse: separate; border-spacing: 1px 10px;}
             #configs td {text-align: center; width: 90px; border:1px solid black;}
-            
             #buttonsplace {position: relative}
             .controlbutton {width:150px; height:20px}
             .input {text-align: center}
-            
             #wavelength1 {width:80px;}
             input {width:80px}
             select {width: 80px;}

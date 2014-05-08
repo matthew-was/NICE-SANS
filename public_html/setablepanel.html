@@ -4,7 +4,7 @@
         <title>Sample Panel</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src=setable.js></script>
         <script>
@@ -12,15 +12,15 @@
                 window.onload = function() {
                     drawTable();
                 };
-                
+
                 $("#add").click(function(){
                     addLine();
                 });
-                
+
                 $("#del").click(function(){
                     delLine();
                 });
-                
+
             });
         </script>
         <style>
@@ -55,9 +55,9 @@
             <div id="head">
                 <div id="sample">
                     <table id="sampleTable">
-                        <tr><th colspan=4>Sample</th></tr>
-                        <tr><td class="dColN" >Name</td><td class="dColT" >Thickness (mm)</td><td class="dColM" >Mass (g)</td><td class="dColD" >Description</td></tr>
-                        <tr><td class="dColN"><input class="iColN" type=text/></td><td class="dColT" ><input class="iColT" type=text value=1 /></td><td class="dColM"><input class="iColM" type=text/ value="0.4"></td><td class="dColD"><input class="iColD" type=text /></td></tr>
+                        <tr><th colspan=3>Sample</th></tr>
+                        <tr><td class="dColN" >Name</td><td class="dColT" >Thickness (mm)</td><td class="dColD" >Description</td></tr>
+                        <tr><td class="dColN"><input class="iColN" type=text/></td><td class="dColT" ><input class="iColT" type=text value=1 /></td><td class="dColD"><input class="iColD" type=text /></td></tr>
                     </table>
                 </div>
             </div>

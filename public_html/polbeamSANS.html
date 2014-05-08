@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sample Panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src=pasans.js></script>
+    <script>
+        $(function() {
+        
+            $('#sampleTabs').tabs();
+            
+        });
+    </script>
+    <style>
+        #top {background-color: lightgrey;width: auto; height: auto;}
+        .dColT, .dColN, .dColM, .dColD {width: auto; text-align: center}
+        .iColN {width: 100px; text-align: center;}
+        .iColT {width: 30px; text-align: center;}
+        .iColM {width: 30px; text-align: center;}
+        .iColD {width: 200px; text-align: center;}
+        #sampleTable td {border: 1px black solid}
+        #sampleTable {border-collapse: collapse}
+        #seTable td {border-bottom: 1px solid black; border-top: 1px solid blacK;}
+        #seTable {border-collapse: collapse; margin-top: 15px}
+        .seColT1, .seColM1, .seColSC1, .seColTC1 {height: 40px; width: 130px; text-align: center; border-left: 1px solid black;}
+        .seColT2, .seColM2, .seColSC2, .seColTC2 {width:100px; text-align:center; border-right: 1px solid black; }
+        .siColT, .siColM, siColSC, .siColTC {width: 80px; text-align:center}
+        #main {padding-top: 20px; padding-bottom: 20px; background-color: lightgrey;}
+        #sample {display: inline-block; width: 60%; background-color: lightgrey}
+        #sampleTabs {font-size: 0.9em;}
+        #empty, #empty td, #empty th {border: 1px solid black; border-collapse: collapse; text-align: center;}
+        #blocked, #blocked td, #blocked th {border: 1px solid black; border-collapse: collapse; text-align: center;}
+        #samples, #samples td, #samples th {border: 1px solid black; border-collapse: collapse; text-align: center;}
+        .scol {width: 100px}
+        .spacer {height: 20px}
+        .tCol {width: 100px}
+        .times {width: 80px; text-align: center}
+        #details {display: inline-block; width:39%; vertical-align: top;}
+        #hecellDetails {width: 200px; margin-left: 25%;padding-top: 50px}
+        #heDetails, #heDetails td {text-align: center}
+        .hecell {width: 50px; text-align: center}
+        #foot {background-color: lightgrey; padding: 10px;}
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div id="top">
+            <div id="sample">
+                <table id="sampleTable">
+                    <tr>
+                        <th colspan=4>Sample</th>
+                    </tr>
+                    <tr>
+                        <td class="dColN">Name</td>
+                        <td class="dColT">Thickness (mm)</td>
+                        <td class="dColM">Mass (g)</td>
+                        <td class="dColD">Description</td>
+                    </tr>
+                    <tr>
+                        <td class="dColN">
+                            <input class="iColN" type=text/>
+                        </td>
+                        <td class="dColT">
+                         <input class="iColT" type=text value=1 />
+                        </td>
+                        <td class="dColM">
+                            <input class="iColM" type=text value="0.4" />
+                        </td>
+                        <td class="dColD">
+                            <input class="iColD" type=text />
+                        </td>
+                    </tr>
+                </table>
+                <table id="seTable">
+                    <tr>
+                        <th colspan=4>Sample Environment</th>
+                    </tr>
+                    <tr>
+                        <td class=seColSC1>Scattering Configuration </td>
+                        <td class=seColSC2>
+                            <select class=siColSC>
+                                <option>1.1m5</option>
+                                <option>1.1m5t</option>
+                                <option>5m5</option>
+                                <option>5m5t</option>
+                                <option>5m14</option>
+                                <option>5m14t</option>
+                            </select>
+                        </td>
+                        <td class=seColTC1>Transmission Configuration </td>
+                        <td class=seColTC2>
+                            <select class=siColTC>
+                                <option>1.1m5</option>
+                                <option>1.1m5t</option>
+                                <option>5m5</option>
+                                <option>5m5t</option>
+                                <option>5m14</option>
+                                <option>5m14t</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=seColT1>Temperature (K)</td>
+                        <td class=seColT2>
+                            <input class=siColT type=text />
+                        </td>
+                        <td class=seColM1>Magnetic Field (T)</td>
+                        <td class=seColM2>
+                            <input class=siColM type=text />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="main">
+            <div id=sample>
+                <div id="sampleTabs">
+                    <ul>
+                        <li><a href="#stabs-1">Open Beam</a></li>
+                        <li><a href="#stabs-2">Blocked Beam</a></li>
+                        <li><a href="#stabs-3">Sample</a></li>
+                    </ul>
+                    <div id="stabs-1">
+                        <table id=empty>
+                            <tr><th>File Header</th><th>SM State</th><th>Flipper State</th><th>3He State</th><th>Transmission / Scattering </th><th>Time</th></tr>
+                            <tr class=spacer></tr>
+                            <tr><td>A.</td><td>In</td><td>Off</td><td>Out</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td></tr>
+                            <tr><td>B.</td><td>Out</td><td>Off</td><td>Out</td><td>Transmission</td><td class=tCol><input type=text class=times id=bTime value=180 /></td></tr>
+                        </table>
+                    </div>
+                    <div id="stabs-2">
+                        <table id=blocked>
+                            <tr><th>File Header</th><th>SM State</th><th>Flipper State</th><th>3He State</th><th>Transmission / Scattering </th><th>Time</th></tr>
+                            <tr class=spacer></tr>
+                            <tr><td>D.</td><td>Out</td><td>Off</td><td>Out</td><td>Transmission</td><td class=tCol><input type=text class=times id=dTime value=180 /></td></tr>
+                            <tr><td>G.</td><td>Out</td><td>Off</td><td>In</td><td>Transmission</td><td class=tCol><input type=text class=times id=gTime value=180 /></td></tr>
+                            <tr><td>L.</td><td>In</td><td>Off</td><td>Out</td><td>Transmission</td><td class=tCol><input type=text class=times id=lTime value=180 /></td></tr>
+                            <tr><td>Q.</td><td>Out</td><td>Off</td><td>Out</td><td>Scattering</td><td class=tCol><input type=text class=times id=qTime value=300 /></td></tr>
+                        </table>
+                    </div>
+                    <div id="stabs-3">
+                        <table id=samples>
+                            <tr><th>File Header</th><th>SM State</th><th>Flipper State</th><th>3He State</th><th>Transmission /Scattering </th><th>Time</th><th class=scol>Purpose</th></tr>
+                            <tr class=spacer></tr>
+                            <tr><td>C.</td><td>Out</td><td>Off</td><td>Out</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td></td></tr>
+                            <tr><td>E.</td><td>Out</td><td>Off</td><td>Out</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td></td></tr>
+                            <tr><td>F.</td><td>Out</td><td>Off</td><td>In</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td></td></tr>
+                            <tr class=spacer></tr>
+                            <tr><td>H.</td><td>In</td><td>Off</td><td>In</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td>Up Up</td></tr>
+                            <tr><td>I.</td><td>In</td><td>On</td><td>In</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td>Down Up</td></tr>
+                            <tr><td>J.</td><td>In</td><td>On</td><td>In</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td>Down Down</td></tr>
+                            <tr><td>K.</td><td>In</td><td>Off</td><td>In</td><td>Transmission</td><td class=tCol><input type=text class=times id=aTime value=180 /></td><td>Up Down</td></tr>
+                            <tr class=spacer></tr>
+                            <tr><td>M.</td><td>In</td><td>Off</td><td>In</td><td>Scattering</td><td class=tCol><input type=text class=times id=aTime value=3600 /></td><td>Up Up</td></tr>
+                            <tr><td>N.</td><td>In</td><td>On</td><td>In</td><td>Scattering</td><td class=tCol><input type=text class=times id=aTime value=3600 /></td><td>Down Up</td></tr>
+                            <tr><td>O.</td><td>In</td><td>On</td><td>In</td><td>Scattering</td><td class=tCol><input type=text class=times id=aTime value=3600 /></td><td>Down Down</td></tr>
+                            <tr><td>P.</td><td>In</td><td>Off</td><td>In</td><td>Scattering</td><td class=tCol><input type=text class=times id=aTime value=3600 /></td><td>Up Down</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id=details>
+                <div id=hecellDetails>
+                    <table id=heDetails>
+                        <tr><td>3He "In" Position</td><td><input type=text class=hecell value=0 /></td></tr>
+                        <tr><td>3He "Out" Position</td><td><input type=text class=hecell value=40 /></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="foot">
+        </div>
+    </div>
+
+</body>
+
+</html>
